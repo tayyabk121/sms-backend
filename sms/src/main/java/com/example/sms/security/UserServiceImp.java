@@ -1,0 +1,46 @@
+package com.example.sms.security;
+
+import com.example.sms.entity.User;
+import com.example.sms.repository.UserRepository;
+import com.example.sms.request.UserRequest;
+import com.example.sms.response.UserResponse;
+import com.example.sms.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
+@Service
+@RequiredArgsConstructor
+public class UserServiceImp implements UserService {
+
+    @Autowired
+    private final UserRepository userRepository;
+    private final UserSecurity userSecurity;
+
+    @Override
+    public void signUp(UserRequest userRequest) {
+        User user = new User();
+        user.setEmail(userRequest.getEmail());
+        user.setPassword(userSecurity.passwordEncoder().encode(userRequest.getPassword()));
+//        user.setPhone(userRequest.getPhone());
+        user.setRole(userRequest.getRole());
+        userRepository.save(user);
+    }
+
+    @Override
+    public List<UserResponse> findAll() {
+        List<User> all = userRepository.findAll();
+       return all.stream().map(UserResponse::new).toList();
+    }
+
+    @Override
+    public Boolean logout(String token) {
+        Set<String> blackList = new HashSet<>();
+        return blackList.contains(token);
+    }
+}
