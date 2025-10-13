@@ -52,4 +52,14 @@ public class UserControllerr {
         return userService.findAll();
     }
 
+    @PostMapping("/logout")
+    public String logout (@RequestHeader ("Authorization") String token){
+        if(token.startsWith("Bearer ")){
+            token = token.substring(7);
+        }
+        userService.logout(token);
+        return "Logout Successfully";
+
+    }
+
 }

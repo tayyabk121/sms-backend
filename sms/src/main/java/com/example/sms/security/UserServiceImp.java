@@ -1,14 +1,19 @@
 package com.example.sms.security;
 
+import com.example.sms.entity.Jwt;
 import com.example.sms.entity.User;
+import com.example.sms.repository.JwtRepository;
 import com.example.sms.repository.UserRepository;
 import com.example.sms.request.UserRequest;
 import com.example.sms.response.UserResponse;
 import com.example.sms.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +26,7 @@ public class UserServiceImp implements UserService {
     @Autowired
     private final UserRepository userRepository;
     private final UserSecurity userSecurity;
+    private final JwtRepository jwtRepository;
 
     @Override
     public void signUp(UserRequest userRequest) {
@@ -39,8 +45,21 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public Boolean logout(String token) {
-        Set<String> blackList = new HashSet<>();
-        return blackList.contains(token);
+    public void logout(String token) {
+        Jwt jwt = new Jwt();
+        jwt.setJwt(token);
+        jwtRepository.save(jwt);
+    }
+
+    @Scheduled(fixedRate = 60000)
+    public String logoutScheduled (){
+        List<Jwt> all = jwtRepository.findAll();
+        for(Jwt list: all){
+            LocalTime time = list.getGeneratedAt().toLocalTime().plusHours(7);
+            if(LocalTime.now().isAfter(time)){
+                jwtRepository.delete(list);
+            }
+        }
+        return "Scheduled is Running";
     }
 }

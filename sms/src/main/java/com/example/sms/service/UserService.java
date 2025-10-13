@@ -8,5 +8,5 @@ import java.util.List;
 public interface UserService {
     void signUp (UserRequest user);
     List<UserResponse> findAll ();
-    Boolean logout (String token);
+    void logout (String token);
 }
