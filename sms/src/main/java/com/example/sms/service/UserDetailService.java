@@ -1,4 +1,4 @@
-package com.example.sms.security;
+package com.example.sms.service;
 
 import com.example.sms.entity.User;
 import com.example.sms.repository.UserRepository;

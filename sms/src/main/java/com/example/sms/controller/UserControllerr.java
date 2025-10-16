@@ -1,10 +1,9 @@
 package com.example.sms.controller;
 
-import com.example.sms.entity.User;
 import com.example.sms.request.UserRequest;
 import com.example.sms.response.UserResponse;
 import com.example.sms.security.JwtUtil;
-import com.example.sms.security.UserDetailService;
+import com.example.sms.service.UserDetailService;
 import com.example.sms.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

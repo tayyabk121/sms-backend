@@ -1,4 +1,4 @@
-package com.example.sms.security;
+package com.example.sms.serviceimpl;
 
 import com.example.sms.entity.Jwt;
 import com.example.sms.entity.User;
@@ -6,18 +6,15 @@ import com.example.sms.repository.JwtRepository;
 import com.example.sms.repository.UserRepository;
 import com.example.sms.request.UserRequest;
 import com.example.sms.response.UserResponse;
+import com.example.sms.security.UserSecurity;
 import com.example.sms.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -34,7 +31,7 @@ public class UserServiceImp implements UserService {
         user.setEmail(userRequest.getEmail());
         user.setPassword(userSecurity.passwordEncoder().encode(userRequest.getPassword()));
 //        user.setPhone(userRequest.getPhone());
-        user.setRole(userRequest.getRole());
+        user.setRole(userRequest.getRole().toUpperCase());
         userRepository.save(user);
     }
 
