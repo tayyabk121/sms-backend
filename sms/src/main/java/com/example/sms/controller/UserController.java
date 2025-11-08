@@ -1,5 +1,6 @@
 package com.example.sms.controller;
 
+import com.example.sms.entity.User;
 import com.example.sms.request.UserRequest;
 import com.example.sms.response.UserResponse;
 import com.example.sms.security.JwtUtil;
@@ -29,10 +30,12 @@ public class UserController {
     private  final JwtUtil jwtUtil;
 
     @PostMapping("/signUp")
-    public String signUp (@RequestBody UserRequest user){
+    public String signUp (@RequestBody User user){
         userService.signUp(user);
         return "Registered Successfully";
     }
+
+
     @PostMapping("/login")
     public ResponseEntity<String> login (@RequestBody UserRequest user){
         try{
@@ -46,6 +49,9 @@ public class UserController {
             return new ResponseEntity<>("Incorrect Email or Password ", HttpStatus.BAD_REQUEST);
         }
     }
+
+
+
     @GetMapping("/getAll")
     public List<UserResponse> findAll (){
         return userService.findAll();

@@ -1,7 +1,7 @@
 package com.example.sms.security;
 
 import com.example.sms.entity.Jwt;
-import com.example.sms.repository.JwtRepository;
+import com.example.sms.repository.mysql.JwtRepository;
 import com.example.sms.service.UserDetailService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

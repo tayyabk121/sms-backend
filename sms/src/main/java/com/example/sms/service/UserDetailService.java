@@ -1,7 +1,7 @@
 package com.example.sms.service;
 
 import com.example.sms.entity.User;
-import com.example.sms.repository.UserRepository;
+import com.example.sms.repository.mysql.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

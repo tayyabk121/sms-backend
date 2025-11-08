@@ -1,7 +1,8 @@
-package com.example.sms.serviceImpl;
+package com.example.sms.serviceimpl;
 
-import com.example.sms.Repository.FileRepository;
+
 import com.example.sms.entity.FileEntity;
+import com.example.sms.repository.mongo.FileRepositoryMongo;
 import com.example.sms.service.FileService;
 import com.mongodb.client.gridfs.GridFSBucket;
 import com.mongodb.client.gridfs.model.GridFSFile;
@@ -20,9 +21,9 @@ import java.util.List;
 public class FileServiceImpl implements FileService {
 
     private final GridFSBucket gridFSBucket;
-    private final FileRepository fileRepository;
+    private final FileRepositoryMongo fileRepository;
 
-    public FileServiceImpl(MongoDatabaseFactory dbFactory, FileRepository fileRepository) {
+    public FileServiceImpl(MongoDatabaseFactory dbFactory, FileRepositoryMongo fileRepository) {
         this.gridFSBucket = com.mongodb.client.gridfs.GridFSBuckets.create(dbFactory.getMongoDatabase());
         this.fileRepository = fileRepository;
     }

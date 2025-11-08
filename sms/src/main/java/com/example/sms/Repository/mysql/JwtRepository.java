@@ -1,4 +1,4 @@
-package com.example.sms.repository;
+package com.example.sms.repository.mysql;
 
 import com.example.sms.entity.Jwt;
 import org.springframework.data.jpa.repository.JpaRepository;

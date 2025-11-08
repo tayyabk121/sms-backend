@@ -2,8 +2,8 @@ package com.example.sms.serviceimpl;
 
 import com.example.sms.entity.Jwt;
 import com.example.sms.entity.User;
-import com.example.sms.repository.JwtRepository;
-import com.example.sms.repository.UserRepository;
+import com.example.sms.repository.mysql.JwtRepository;
+import com.example.sms.repository.mysql.UserRepository;
 import com.example.sms.request.UserRequest;
 import com.example.sms.response.UserResponse;
 import com.example.sms.security.UserSecurity;
@@ -26,13 +26,13 @@ public class UserServiceImp implements UserService {
     private final JwtRepository jwtRepository;
 
     @Override
-    public void signUp(UserRequest userRequest) {
-        User user = new User();
-        user.setEmail(userRequest.getEmail());
-        user.setPassword(userSecurity.passwordEncoder().encode(userRequest.getPassword()));
+    public void signUp(User user) {
+        User user1 = new User();
+        user1.setEmail(user.getEmail());
+        user1.setPassword(userSecurity.passwordEncoder().encode(user.getPassword()));
 //        user.setPhone(userRequest.getPhone());
-        user.setRole(userRequest.getRole().toUpperCase());
-        userRepository.save(user);
+        user1.setRole(user.getRole().toUpperCase());
+        userRepository.save(user1);
     }
 
     @Override

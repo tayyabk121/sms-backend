@@ -38,10 +38,10 @@ public class UserSecurity {
                 .authorizeHttpRequests(auth->
                         auth
                                 .requestMatchers("/user/signUp","/user/login").permitAll()
-//                                .requestMatchers("/**").hasAnyRole("USER","SUPER_USER","ADMIN","SUPER_ADMIN")
+                                .requestMatchers("/**").hasAnyRole("USER","SUPER_USER","ADMIN","SUPER_ADMIN")
 //                                .requestMatchers("/**").hasAnyRole("SUPER_USER","ADMIN","SUPER_ADMIN")
 //                                .requestMatchers("/**").hasAnyRole("ADMIN","SUPER_ADMIN")
-                                .requestMatchers("/**").hasRole("SUPER_ADMIN")
+//                                .requestMatchers("/**").hasRole("SUPER_ADMIN")
                                 .anyRequest().authenticated());
 //                .httpBasic(Customizer.withDefaults());
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
