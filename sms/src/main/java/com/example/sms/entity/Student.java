@@ -1,32 +1,51 @@
 package com.example.sms.entity;
 
+import com.example.sms.util.Gender;
+import com.example.sms.util.StudentStatus;
+import com.example.sms.util.Transport;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
-@Table(name = "students")
+import java.time.LocalDate;
+import java.util.UUID;
+
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String studentId;
-    private String fullName;
-    private String fathersName;
-    private String mothersName;
-    private String gradeName;
-    private String address;
-    private String phoneNumber;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "branch_id", nullable = false)
-    private Branch branch;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "grade_id", nullable = false)
-    private Grade grade;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "teacher_id", nullable = false)
-    private Teacher teacher;
+    private UUID id;
+    
+    @OneToOne
+    @JoinColumn(name = "class_id")
+    private Class classId;
+    
+    @Column(unique = true, nullable = false)
+    private String addressNo;
+    
+    @Column(nullable = false)
+    private String firstName;
+    
+    @Column(nullable = false)
+    private String lastName;
+    private LocalDate dob;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Gender gender;
+    
+    private String bloodGroup;
+    
+    @Enumerated(EnumType.STRING)
+    private Transport transport;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private StudentStatus status;
+    
+    private LocalDate admittedOn;
 }

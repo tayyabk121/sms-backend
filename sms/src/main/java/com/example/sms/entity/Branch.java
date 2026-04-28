@@ -1,22 +1,43 @@
 package com.example.sms.entity;
 
+import com.example.sms.util.BranchStatus;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
-import java.util.List;
+import java.util.UUID;
 
-@Data
 @Entity
-@Table(name = "branches")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Branch {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String branchId;
-
-    @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Student> students;
-
-    @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Teacher> teachers;
+    private UUID id;
+    
+    @OneToMany
+    @JoinColumn(name = "school_group_id", nullable = false)
+    private UUID schoolGroupId;
+    
+    @Column(nullable = false)
+    private String name;
+    
+    private String address;
+    
+    private String city;
+    
+    private String phone;
+    
+    private String email;
+    
+    @OneToMany
+    @JoinColumn(name = "academic_year_id")
+    private AcademicYear academicYearId;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private BranchStatus status;
 }
