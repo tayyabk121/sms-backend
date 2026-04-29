@@ -18,7 +18,7 @@ public class Branch {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "school_group_id", nullable = false)
     private UUID schoolGroupId;
     
