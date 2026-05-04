@@ -6,21 +6,26 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.UUID;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
+@Table(name = "staff_attendance", indexes = {
+        @Index(name = "idx_staff_attendance_date", columnList = "date")
+})
 public class StaffAttendance {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private String id; // Consistent with other entities (String UUID)
     
-    @OneToMany
-    @JoinColumn(name = "staff_id")
-    private Staff staffId;
+    // Relation with Staff
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "staff_id", nullable = false)
+    private Staff staff;
     
     @Column(nullable = false)
     private LocalDate date;
@@ -29,9 +34,12 @@ public class StaffAttendance {
     @Column(nullable = false)
     private StaffAttendanceStatus status;
     
+    @Column(name = "check_in_time")
     private LocalTime checkInTime;
     
+    @Column(name = "check_out_time")
     private LocalTime checkOutTime;
     
+    @Column(columnDefinition = "TEXT")
     private String remarks;
 }

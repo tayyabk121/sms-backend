@@ -5,7 +5,7 @@
 //import org.springframework.stereotype.Service;
 //
 //@Service
-//public interface StudentService {
+//public interface CreateStudentService {
 //
 //    StudentResponse getAllStudents(StudentRequest request);
 //}

@@ -4,7 +4,7 @@ import com.example.sms.util.BranchStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.UUID;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,11 +16,11 @@ public class Branch {
     
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private String id;
     
     @ManyToOne
     @JoinColumn(name = "school_group_id", nullable = false)
-    private UUID schoolGroupId;
+    private SchoolGroup schoolGroupId;
     
     @Column(nullable = false)
     private String name;
@@ -33,9 +33,9 @@ public class Branch {
     
     private String email;
     
-    @OneToMany
-    @JoinColumn(name = "academic_year_id")
-    private AcademicYear academicYearId;
+    @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<AcademicYear> academicYearId;
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

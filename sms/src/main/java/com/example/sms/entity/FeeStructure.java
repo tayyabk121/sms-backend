@@ -2,68 +2,52 @@ package com.example.sms.entity;
 
 import com.example.sms.util.FeeType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 /**
  * Represents the fee structure for a specific class and term.
  */
 @Entity
+@Table(name = "fee_structures")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class FeeStructure {
     
-    /**
-     * Unique identifier for the fee structure.
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private String id;
     
-    @OneToMany
+    // Relation with Branch
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "branch_id", nullable = false)
-    private Branch branchId;
+    private Branch branch;
     
-    /**
-     * The class associated with this fee structure.
-     */
-    @OneToOne
-    @JoinColumn(name = "class_id")
-    private  Class classId;
+    // Relation with SchoolClass (Reserved keyword 'Class' avoided)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "School_class_id", nullable = false)
+    private SchoolClass schoolClassId;
     
-    @ManyToOne
-    @JoinColumn(name = "academic_year_id")
-    private AcademicYear academicYearId;
+    // Relation with Academic Year
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "academic_year_id", nullable = false)
+    private AcademicYear academicYear;
     
-    /**
-     * The term for which this fee structure applies (e.g., "Term 1", "Term 2").
-     */
     @Column(nullable = false)
-    private String term;
+    private String term; // e.g., "Term 1"
     
-    /**
-     * The type of fee (e.g., Tuition, Lab, Sports).
-     */
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "fee_type", nullable = false)
     private FeeType feeType;
     
-    /**
-     * The amount to be paid for this fee structure.
-     */
     @Column(nullable = false)
     private double amount;
     
-    /**
-     * The due date for the fee payment.
-     */
+    @Column(name = "due_date")
     private LocalDate dueDate;
     
 }

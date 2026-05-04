@@ -4,13 +4,12 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Entity
 @Table(
         name = "academic_years",
         uniqueConstraints = {
-                // Ensure only ONE current year per branch
+                // Ensures only ONE record can be 'is_current = true' for a specific branch
                 @UniqueConstraint(
                         name = "unique_current_year_per_branch",
                         columnNames = {"branch_id", "is_current"}
@@ -23,16 +22,18 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class AcademicYear {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private String id;
     
-    // FK → branches
-    @Column(name = "branch_id", nullable = false)
-    private Branch branchId;
+    // Correct Relation: Many Academic Years belong to one Branch
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "branch_id", nullable = false)
+    private Branch branch;
     
     @Column(nullable = false)
-    private String label; // e.g. 2025-26
+    private String label; // e.g., "2025-26"
     
     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;

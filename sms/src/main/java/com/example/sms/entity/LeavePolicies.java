@@ -2,12 +2,7 @@ package com.example.sms.entity;
 
 import com.example.sms.util.LeaveType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.util.UUID;
+import lombok.*;
 
 /**
  * Represents the leave policies for a school, defining the types of leaves available,
@@ -17,45 +12,30 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
+@Table(name = "leave_policies")
 public class LeavePolicies {
     
-    /**
-     * Unique identifier for the leave policy.
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private String id;
     
-    /**
-     * The school to which this leave policy applies.
-     */
-    @OneToMany
-    @JoinColumn(name = "branch_id")
-    private Branch branchId;
+    // Relation with Branch
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "branch_id", nullable = false)
+    private Branch branch;
     
-    /**
-     * The type of leave (e.g., sick leave, casual leave, etc.).
-     */
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "leave_type", nullable = false)
     private LeaveType leaveType;
     
-    /**
-     * The number of days allowed for this type of leave.
-     */
-    @Column(nullable = false)
+    @Column(name = "days_allowed", nullable = false)
     private int daysAllowed;
     
-    /**
-     * Indicates whether this type of leave is paid.
-     */
-    @Column(nullable = false)
+    @Column(name = "is_paid", nullable = false)
     private boolean isPaid;
     
-    /**
-     * Indicates whether unused leave days can be carried forward to the next year.
-     */
-    @Column(nullable = false)
+    @Column(name = "carry_forward", nullable = false)
     private boolean carryForward = false;
 }

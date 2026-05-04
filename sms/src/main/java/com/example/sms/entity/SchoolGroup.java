@@ -1,55 +1,56 @@
 package com.example.sms.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.util.UUID;
-
-
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
 /**
  * Represents a school group, which can encompass multiple branches.
  * Contains basic information about the school group such as name,
  * logo, and contact details.
  */
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Entity
+@Table(name = "school_groups")
 public class SchoolGroup {
+    
     /**
      * Unique identifier for the school group, generated as a UUID.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private String id;
     
     /**
      * The name of the school group (e.g., "ABC School Group").
      */
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
     
     /**
-     * The URL of the school group's logo. This field is optional.
+     * The URL of the school group's logo.
      */
+    @Column(name = "logo_url")
     private String logoUrl;
     
     /**
-     * The contact email address for the school group. This field is optional.
+     * The contact email address for the school group.
      */
+    @Column(name = "contact_email", nullable = false, unique = true)
     private String contactEmail;
     
     /**
-     * The contact phone number for the school group. This field is optional.
+     * The contact phone number for the school group.
      */
+    @Column(name = "contact_phone", nullable = false, unique = true)
     private String contactPhone;
     
     /**
-     * The address of the school group. This field is optional.
+     * The address of the school group.
      */
+    @Column(columnDefinition = "TEXT")
     private String address;
 }

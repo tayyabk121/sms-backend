@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 /**
  * Represents a leave request made by a staff member.
@@ -14,62 +13,41 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
+@Table(name = "leaves")
 public class Leaves {
     
-    /**
-     * Unique identifier for the leave request.
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private String id;
     
-    /**
-     * The staff member who made the leave request.
-     */
-    @ManyToOne
-    @JoinColumn(name = "staff_id")
-    private Staff staffId;
+    // Relation with Staff
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "staff_id", nullable = false)
+    private Staff staff;
     
-    /**
-     * The leave policy associated with this leave request.
-     */
-    @ManyToOne
-    @JoinColumn(name = "leave_policies_id")
-    private LeavePolicies leavePoliciesId;
+    // Relation with LeavePolicies
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "leave_policy_id", nullable = false)
+    private LeavePolicies leavePolicy;
     
-    /**
-     * The start date of the leave.
-     */
-    @Column(nullable = false)
+    @Column(name = "from_date", nullable = false)
     private LocalDate fromDate;
     
-    /**
-     * The end date of the leave.
-     */
-    @Column(nullable = false)
+    @Column(name = "to_date", nullable = false)
     private LocalDate toDate;
     
-    /**
-     * The total number of days for the leave.
-     */
-    @Column(nullable = false)
+    @Column(name = "total_days", nullable = false)
     private int totalDays;
     
-    /**
-     * The reason for the leave request.
-     */
+    @Column(columnDefinition = "TEXT")
     private String reason;
     
-    /**
-     * The current status of the leave request (e.g., PENDING, APPROVED, REJECTED).
-     */
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private LeavesStatus status;
     
-    /**
-     * Indicates whether the leave has been paid or not.
-     */
-    private boolean isPaid;
+    @Column(name = "is_paid", nullable = false)
+    private boolean isPaid = false;
 }

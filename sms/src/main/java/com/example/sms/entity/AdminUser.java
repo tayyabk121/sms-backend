@@ -5,27 +5,28 @@ import com.example.sms.util.AdminStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.UUID;
-
 @Entity
+@Table(name = "admin_users")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Builder
 public class AdminUser {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private String id;
     
-    @OneToMany
+    // Relation with SchoolGroup
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_group_id")
-    private SchoolGroup schoolGroupId;
+    private SchoolGroup schoolGroup;
     
-    @OneToMany
-    @JoinColumn(name = "Branch_id")
-    private Branch branchId;
+    // Relation with Branch
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "branch_id")
+    private Branch branch;
     
     @Column(nullable = false)
     private String name;
@@ -33,17 +34,18 @@ public class AdminUser {
     @Column(nullable = false, unique = true)
     private String email;
     
-    @Column(nullable = false)
+    @Column(name = "password_hash", nullable = false)
     private String passwordHash;
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private AdminRole role;
     
+    @Column(columnDefinition = "TEXT") // Permissions usually lambi hoti hain
     private String permissions;
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private AdminStatus status;
-
+    
 }

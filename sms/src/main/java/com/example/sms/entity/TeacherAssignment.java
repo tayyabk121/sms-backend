@@ -3,20 +3,21 @@ package com.example.sms.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.UUID;
-
+/**
+ * Maps which teacher (Staff) is teaching which Subject to which Class
+ * for a specific Academic Year.
+ */
 @Entity
 @Table(
         name = "teacher_assignments",
         uniqueConstraints = {
-                // Prevent duplicate assignment in same academic year
+                // Prevent duplicate assignment: Same teacher, subject, class in same year
                 @UniqueConstraint(
                         name = "unique_teacher_assignment",
-                        columnNames = {"subject_id", "class_id", "staff_id", "academic_year_id"}
+                        columnNames = {"subject_id", "school_class_id", "staff_id", "academic_year_id"}
                 )
         }
 )
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -26,17 +27,21 @@ public class TeacherAssignment {
     
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private String id;
     
-    @Column(name = "subject_id", nullable = false)
-    private Subject subjectId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "subject_id", nullable = false)
+    private Subject subject;
     
-    @Column(name = "class_id", nullable = false)
-    private Class classId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "school_class_id", nullable = false)
+    private SchoolClass schoolClass;
     
-    @Column(name = "staff_id", nullable = false)
-    private Staff staffId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "staff_id", nullable = false)
+    private Staff staff;
     
-    @Column(name = "academic_year_id", nullable = false)
-    private AcademicYear academicYearId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "academic_year_id", nullable = false)
+    private AcademicYear academicYear;
 }
