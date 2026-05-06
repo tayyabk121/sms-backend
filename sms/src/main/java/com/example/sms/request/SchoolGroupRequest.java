@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class SchoolGroupRequest {
     
     private String schoolGroupId;

@@ -2,12 +2,14 @@ package com.example.sms.response;
 
 
 import com.example.sms.entity.Branch;
+import com.example.sms.util.requestType.AcademicYearRequestType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,7 +19,7 @@ public class AcademicYearResponse {
     
     private String id;
     
-    private Branch branch;
+    private String branch;
     
     private String label; // e.g., "2025-26"
     
@@ -28,5 +30,9 @@ public class AcademicYearResponse {
     private boolean isCurrent;
     
     private String message;
+    
+    private List<AcademicYearResponse> academicYearResponseList;
+    
+    private AcademicYearRequestType academicYearRequestType;
     
 }

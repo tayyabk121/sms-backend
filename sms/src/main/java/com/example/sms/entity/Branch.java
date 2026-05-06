@@ -4,6 +4,7 @@ import com.example.sms.util.BranchStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,13 +30,13 @@ public class Branch {
     
     private String city;
     
-    private String phone;
+    private String phoneNumber;
     
     private String email;
     
     @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private List<AcademicYear> academicYearId;
+    private List<AcademicYear> academicYearId = new ArrayList<>();
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

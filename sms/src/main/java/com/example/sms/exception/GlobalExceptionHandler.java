@@ -6,16 +6,17 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.LocalDateTime;
 
 @Log4j2
-@RequiredArgsConstructor
+@RestControllerAdvice
 public class GlobalExceptionHandler {
     
     @ExceptionHandler(value = StudentFailedException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    private ErrorResponseDTO handleCharacterNotFoundException(
+    private ErrorResponseDTO handleStudentFailedException(
             final StudentFailedException e,
             final HttpServletRequest request) {
         
@@ -28,7 +29,7 @@ public class GlobalExceptionHandler {
     
     @ExceptionHandler(value = SchoolGroupFailedException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    private ErrorResponseDTO handleCharacterNotFoundException(
+    private ErrorResponseDTO handleStudentFailedException(
             final SchoolGroupFailedException e,
             final HttpServletRequest request) {
         
@@ -69,6 +70,19 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     private ErrorResponseDTO handleDeleteFailedException(
             final DeleteFailedException e,
+            final HttpServletRequest request) {
+        
+        return new ErrorResponseDTO(LocalDateTime.now(),
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                e.getMessage(),
+                request.getRequestURI());
+    }
+    
+    @ExceptionHandler(value = AcademicYearIdNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    private ErrorResponseDTO handleAcademicYearIdNotFoundException(
+            final AcademicYearIdNotFoundException e,
             final HttpServletRequest request) {
         
         return new ErrorResponseDTO(LocalDateTime.now(),

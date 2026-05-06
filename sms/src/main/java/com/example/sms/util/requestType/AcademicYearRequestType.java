@@ -4,6 +4,6 @@ public enum AcademicYearRequestType {
     CREATE,
     UPDATE,
     DELETE,
-    GET_BY_ID,
-    GET_ALL
+    FIND_BY_ID,
+    FIND_ALL
 }

@@ -35,10 +35,12 @@ public class UpdateSchoolGroupService implements SchoolGroupOperations{
                     schoolGroupId);
             
             SchoolGroup schoolGroup = schoolGroupValidation
-                    .FindById(schoolGroupId);
-        
-        SchoolGroup update = schoolGroupValidation.update(
+                    .findById(schoolGroupId);
+            
+        SchoolGroup update = schoolGroupMapper.toUpdate(
                 request, schoolGroup);
+        
+        schoolGroupRepository.save(update);
         
         return schoolGroupMapper.toResponse(update);
         

@@ -33,7 +33,7 @@ public class FindByIdSchoolGroupService implements SchoolGroupOperations {
                     schoolGroupId);
             
             SchoolGroup schoolGroup = schoolGroupValidation
-                    .FindById(schoolGroupId);
+                    .findById(schoolGroupId);
             
             log.info("School Group found: {}", schoolGroup.getName());
             

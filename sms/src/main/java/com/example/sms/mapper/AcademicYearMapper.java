@@ -9,5 +9,9 @@ public interface AcademicYearMapper {
     
     AcademicYear toEntity(AcademicYearRequest request, Branch branch);
     
+    AcademicYear toUpdate(AcademicYearRequest request,
+                         AcademicYear academicYear,
+                          Branch branch);
+    
     AcademicYearResponse toResponse(AcademicYear entity);
 }

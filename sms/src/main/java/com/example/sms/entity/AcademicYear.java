@@ -6,16 +6,7 @@ import lombok.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(
-        name = "academic_years",
-        uniqueConstraints = {
-                // Ensures only ONE record can be 'is_current = true' for a specific branch
-                @UniqueConstraint(
-                        name = "unique_current_year_per_branch",
-                        columnNames = {"branch_id", "is_current"}
-                )
-        }
-)
+@Table(name = "academic_years")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -42,5 +33,5 @@ public class AcademicYear {
     private LocalDate endDate;
     
     @Column(name = "is_current", nullable = false)
-    private boolean isCurrent = false;
+    private boolean isCurrent;
 }

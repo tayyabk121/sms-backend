@@ -21,30 +21,12 @@ public class SchoolGroupValidationImpl implements SchoolGroupValidation {
     
     private final SchoolGroupRepository schoolGroupRepository;
     
-    private final SchoolGroupMapper schoolGroupMapper;
-    
     @Override
-    public SchoolGroup FindById(String name) {
+    public SchoolGroup findById(String id) {
         
-        return schoolGroupRepository.findById(name).orElseThrow(()->
+        return schoolGroupRepository.findById(id).orElseThrow(()->
                 new SchoolGroupIdNotFoundException(
-                        "School Group with name " + name + " not found"));
-        
-    }
-    
-//    @Override
-//    public SchoolGroup create(SchoolGroup schoolGroup) {
-//        return null;
-//    }
-//
-    @Override
-    public SchoolGroup update(SchoolGroupRequest request,
-                              SchoolGroup schoolGroup) {
-        
-        SchoolGroup update = schoolGroupMapper.toUpdate(
-                request, schoolGroup);
-        
-        return schoolGroupRepository.save(update);
+                        "School Group with id " + id + " not found"));
         
     }
     
@@ -57,10 +39,5 @@ public class SchoolGroupValidationImpl implements SchoolGroupValidation {
                     "Failed to delete School Group with name "
                     + schoolGroup.getName() + ": " + e.getMessage());
         }
-    }
-    
-    @Override
-    public List<SchoolGroup> schoolGroupList() {
-        return List.of();
     }
 }

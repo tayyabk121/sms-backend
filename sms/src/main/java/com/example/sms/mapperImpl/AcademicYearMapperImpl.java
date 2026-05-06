@@ -24,13 +24,40 @@ public class AcademicYearMapperImpl implements AcademicYearMapper {
     }
     
     @Override
-    public AcademicYearResponse toResponse(AcademicYear entity) {
+    public AcademicYear toUpdate(AcademicYearRequest request,
+                                 AcademicYear academicYear,
+                                 Branch branch) {
+        
+        if(branch != null && !branch.getId().isEmpty()) {
+            academicYear.setBranch(branch);
+        }
+        
+        if (request.getLabel() != null && !request.getLabel().isEmpty()) {
+            academicYear.setLabel(request.getLabel());
+        }
+        
+        if (request.getStartDate() != null &&
+                !request.getStartDate().toString().isEmpty()) {
+            academicYear.setStartDate(request.getStartDate());
+        }
+        
+        if (request.getEndDate() != null &&
+                !request.getEndDate().toString().isEmpty()) {
+            academicYear.setEndDate(request.getEndDate());
+        }
+            academicYear.setCurrent(request.isCurrent());
+        
+        return academicYear;
+    }
+    
+    @Override
+    public AcademicYearResponse toResponse(AcademicYear academicYear) {
         return AcademicYearResponse.builder()
-                .id(entity.getId())
-                .branch(entity.getBranch())
-                .label(entity.getLabel())
-                .startDate(entity.getStartDate())
-                .endDate(entity.getEndDate())
-                .isCurrent(entity.isCurrent()).build();
+                .id(academicYear.getId())
+                .branch(academicYear.getBranch().getId())
+                .label(academicYear.getLabel())
+                .startDate(academicYear.getStartDate())
+                .endDate(academicYear.getEndDate())
+                .isCurrent(academicYear.isCurrent()).build();
     }
 }

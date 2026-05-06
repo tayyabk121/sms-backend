@@ -31,7 +31,7 @@ public class DeleteSchoolGroupService implements SchoolGroupOperations{
                 schoolGroupId);
         
         SchoolGroup schoolGroup = schoolGroupValidation
-                .FindById(schoolGroupId);
+                .findById(schoolGroupId);
         
         schoolGroupValidation.delete(schoolGroup);
         

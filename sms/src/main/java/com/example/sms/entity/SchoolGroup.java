@@ -39,14 +39,14 @@ public class SchoolGroup {
     /**
      * The contact email address for the school group.
      */
-    @Column(name = "contact_email", nullable = false, unique = true)
-    private String contactEmail;
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
     
     /**
      * The contact phone number for the school group.
      */
-    @Column(name = "contact_phone", nullable = false, unique = true)
-    private String contactPhone;
+    @Column(name = "phone_number", nullable = false, unique = true)
+    private String phoneNumber;
     
     /**
      * The address of the school group.

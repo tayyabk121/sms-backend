@@ -19,8 +19,8 @@ public class SchoolGroupMapperImpl implements SchoolGroupMapper {
         return SchoolGroup.builder()
                 .name(request.getName())
                 .logoUrl(request.getLogoUrl())
-                .contactEmail(request.getEmail())
-                .contactPhone(request.getPhoneNumber())
+                .email(request.getEmail())
+                .phoneNumber(request.getPhoneNumber())
                 .address(request.getAddress())
                 .build();
     }
@@ -32,8 +32,8 @@ public class SchoolGroupMapperImpl implements SchoolGroupMapper {
                 .id(schoolGroup.getId())
                 .name(schoolGroup.getName())
                 .logoUrl(schoolGroup.getLogoUrl())
-                .email(schoolGroup.getContactEmail())
-                .phoneNumber(schoolGroup.getContactPhone())
+                .email(schoolGroup.getEmail())
+                .phoneNumber(schoolGroup.getPhoneNumber())
                 .address(schoolGroup.getAddress())
                 .build();
     }
@@ -49,10 +49,10 @@ public class SchoolGroupMapperImpl implements SchoolGroupMapper {
             schoolGroup.setLogoUrl(request.getLogoUrl());
         }
         if(request.getEmail() != null && !request.getEmail().isEmpty()) {
-            schoolGroup.setContactEmail(request.getEmail());
+            schoolGroup.setEmail(request.getEmail());
         }
         if(request.getPhoneNumber() != null && !request.getPhoneNumber().isEmpty()) {
-            schoolGroup.setContactPhone(request.getPhoneNumber());
+            schoolGroup.setPhoneNumber(request.getPhoneNumber());
         }
         if(request.getAddress() != null && !request.getAddress().isEmpty()) {
             schoolGroup.setAddress(request.getAddress());
