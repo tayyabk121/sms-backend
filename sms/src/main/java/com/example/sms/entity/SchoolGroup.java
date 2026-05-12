@@ -4,9 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 
 /**
- * Represents a school group, which can encompass multiple branches.
- * Contains basic information about the school group such as name,
- * logo, and contact details.
+ * Entity class representing a School Group in the school management system.
+ * It contains details about the school group, including its name, logo URL,
+ * contact email, phone number, and address. Each school group can have multiple
+ * branches associated with it.
  */
 @Getter
 @Setter
@@ -17,40 +18,30 @@ import lombok.*;
 @Table(name = "school_groups")
 public class SchoolGroup {
     
-    /**
-     * Unique identifier for the school group, generated as a UUID.
-     */
+    // Primary key for the SchoolGroup entity, generated as a UUID string.
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     
-    /**
-     * The name of the school group (e.g., "ABC School Group").
-     */
+    // Name of the school group. This field is required and must be unique.
     @Column(nullable = false, unique = true)
     private String name;
     
-    /**
-     * The URL of the school group's logo.
-     */
+    // URL of the school group's logo. This field is optional.
     @Column(name = "logo_url")
     private String logoUrl;
     
-    /**
-     * The contact email address for the school group.
-     */
+    // Contact email for the school group.
+    // This field is required and must be unique.
     @Column(name = "email", nullable = false, unique = true)
     private String email;
     
-    /**
-     * The contact phone number for the school group.
-     */
+    // Contact phone number for the school group.
+    // This field is required and must be unique.
     @Column(name = "phone_number", nullable = false, unique = true)
     private String phoneNumber;
     
-    /**
-     * The address of the school group.
-     */
+    // Address of the school group. This field is required.
     @Column(columnDefinition = "TEXT")
     private String address;
 }

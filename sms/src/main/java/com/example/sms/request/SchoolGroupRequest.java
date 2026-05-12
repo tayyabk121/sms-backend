@@ -2,12 +2,15 @@ package com.example.sms.request;
 
 import com.example.sms.util.requestType.SchoolGroupRequestType;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Request class for handling school group-related operations.
+ * This class contains fields that represent the necessary information
+ * for creating, updating, or managing school groups.
+ */
 @Getter
 @Setter
-//@RequiredArgsConstructor
 public class SchoolGroupRequest {
     
     private String schoolGroupId;

@@ -10,18 +10,37 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service class responsible for handling the deletion of school groups.
+ * Implements the SchoolGroupOperations interface to define the specific
+ * operation type and logic for deleting a school group.
+ */
 @Log4j2
 @Service
 @RequiredArgsConstructor
 public class DeleteSchoolGroupService implements SchoolGroupOperations{
 
+    /** Validation component for performing checks and operations
+     * related to SchoolGroup entities. */
     private final SchoolGroupValidation schoolGroupValidation;
 
+    /** SchoolGroupRequestType that this service handles, which is DELETE. */
     @Override
     public SchoolGroupRequestType getSchoolGroupRequestType() {
         return SchoolGroupRequestType.DELETE;
     }
 
+    /**
+     * Performs the operation to delete a school group based on
+     * the provided request.
+     * It validates the existence of the school group, deletes it,
+     * and returns a response.
+     *
+     * @param request The SchoolGroupRequest containing the ID of
+     * the school group to be deleted.
+     * @return A SchoolGroupResponse indicating the success of
+     * the deletion operation.
+     */
     @Override
     public SchoolGroupResponse performOperation(SchoolGroupRequest request) {
         

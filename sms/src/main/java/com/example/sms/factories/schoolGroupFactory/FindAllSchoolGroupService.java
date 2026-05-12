@@ -12,20 +12,45 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service class responsible for handling the operation of finding all
+ * school groups.
+ * Implements the SchoolGroupOperations interface to define the specific
+ * operation type and logic.
+ */
 @Log4j2
 @Service
 @RequiredArgsConstructor
 public class FindAllSchoolGroupService implements SchoolGroupOperations{
 
+    /** Repository for performing CRUD operations on SchoolGroup entities. */
     private final SchoolGroupRepository schoolGroupRepository;
 
+    /** Mapper for converting between SchoolGroup entities and
+     *  SchoolGroupResponse objects. */
     private final SchoolGroupMapper schoolGroupMapper;
 
+    /**
+     * Returns the type of school group request this service handles,
+     * which is FIND_ALL.
+     *
+     * @return SchoolGroupRequestType.FIND_ALL
+     */
     @Override
     public SchoolGroupRequestType getSchoolGroupRequestType() {
         return SchoolGroupRequestType.FIND_ALL;
     }
 
+    /**
+     * Performs the operation to find all school groups. It retrieves
+     * all school group entities from the repository,
+     * maps them to response objects, and returns a response containing
+     * the list of school groups.
+     *
+     * @param request The SchoolGroupRequest (not used in this operation
+     *               but included for consistency).
+     * @return A SchoolGroupResponse containing a list of all school groups.
+     */
     @Override
     public SchoolGroupResponse performOperation(SchoolGroupRequest request) {
         

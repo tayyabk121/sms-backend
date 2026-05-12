@@ -11,6 +11,13 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a request to create or update a student in the system.
+ * This class contains all the necessary information about the student,
+ * including their personal details, class information, and status.
+ * The studentRequestType field indicates whether the request is for creating
+ * a new student or updating an existing one.
+ */
 @Getter
 @Setter
 @Builder
@@ -36,5 +43,5 @@ public class StudentRequest {
     
     private LocalDate admittedOn;
     
-    private StudentRequestType requestType;
+    private StudentRequestType studentRequestType;
 }

@@ -7,7 +7,9 @@ import lombok.*;
 import java.time.LocalDate;
 
 /**
- * Represents the fee structure for a specific class and term.
+ * Entity class representing a Fee Structure in the school management system.
+ * It contains details about the fee structure, including its association with
+ * a branch, school class, academic year, term, fee type, amount, and due date.
  */
 @Entity
 @Table(name = "fee_structures")
@@ -17,7 +19,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class FeeStructure {
-    
+   
+    // Primary key for the FeeStructure entity, generated as a UUID string.
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
@@ -37,16 +40,20 @@ public class FeeStructure {
     @JoinColumn(name = "academic_year_id", nullable = false)
     private AcademicYear academicYear;
     
+    // Term for which the fee structure applies. This field is required.
     @Column(nullable = false)
     private String term; // e.g., "Term 1"
     
+    // Type of fee, defined as an enum. This field is required.
     @Enumerated(EnumType.STRING)
     @Column(name = "fee_type", nullable = false)
     private FeeType feeType;
     
+    // Amount for the fee structure. This field is required.
     @Column(nullable = false)
     private double amount;
     
+    // Due date for the fee payment. This field is required.
     @Column(name = "due_date")
     private LocalDate dueDate;
     

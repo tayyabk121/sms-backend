@@ -7,7 +7,10 @@ import lombok.*;
 import java.time.LocalDate;
 
 /**
- * Entity representing daily attendance records for students.
+ * Entity class representing Student Attendance in the school management system.
+ * It contains details about the attendance of students, including their
+ * association with a student, date of attendance, attendance status, and any
+ * remarks related to the attendance.
  */
 @Entity
 @Table(name = "student_attendance", indexes = {
@@ -19,28 +22,28 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class StudentAttendance {
-    
+   
+    // Primary key for the StudentAttendance entity, generated as a UUID string.
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     
-    /**
-     * The student whose attendance is being recorded.
-     */
+    // Relation with Student
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
     
+    // Date of attendance. This field is required and indexed for
+    // efficient querying.
     @Column(nullable = false)
     private LocalDate date;
     
-    /**
-     * Attendance status (e.g., PRESENT, ABSENT, LATE, EXCUSED).
-     */
+    // Attendance status, defined as an enum. This field is required and
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private StudentAttendanceStatus status;
     
+    // Remarks related to the attendance. This field is optional and can contain
     @Column(columnDefinition = "TEXT")
     private String remarks;
 }

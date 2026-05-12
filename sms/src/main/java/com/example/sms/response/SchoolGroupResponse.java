@@ -7,7 +7,12 @@ import lombok.Setter;
 
 import java.util.List;
 
-
+/**
+ * Response class for representing a school group in the system.
+ * This class includes fields for the school's ID, name, email, logo URL,
+ * phone number, address, and a message. It also contains a list of
+ * SchoolGroupResponse objects to represent related school groups if needed.
+ */
 @Getter
 @Setter
 @Builder

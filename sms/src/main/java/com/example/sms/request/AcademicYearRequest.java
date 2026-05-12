@@ -7,6 +7,12 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a request for creating or updating an academic year.
+ * This class contains fields for the academic year's ID, branch ID,
+ * label, start and end dates, current status, and the type of request
+ * being made (e.g., create or update).
+ */
 @Getter
 @Setter
 public class AcademicYearRequest {
@@ -21,7 +27,7 @@ public class AcademicYearRequest {
     
     private LocalDate endDate;
     
-    private boolean isCurrent;
+    private Boolean isCurrent;
     
     private AcademicYearRequestType academicYearRequestType;
     

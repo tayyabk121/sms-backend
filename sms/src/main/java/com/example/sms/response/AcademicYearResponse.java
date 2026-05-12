@@ -1,7 +1,5 @@
 package com.example.sms.response;
 
-
-import com.example.sms.entity.Branch;
 import com.example.sms.util.requestType.AcademicYearRequestType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
@@ -11,6 +9,12 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Response class for Academic Year related operations.
+ * This class encapsulates the details of an academic year,
+ * including its ID, branch, label, start and end dates,
+ * current status, and any associated messages or lists of academic years.
+ */
 @Getter
 @Setter
 @Builder
@@ -27,7 +31,7 @@ public class AcademicYearResponse {
     
     private LocalDate endDate;
     
-    private boolean isCurrent;
+    private Boolean isCurrent;
     
     private String message;
     

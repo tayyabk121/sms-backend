@@ -7,9 +7,13 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * SchoolGroupRepository is a Spring Data JPA repository interface for managing
+ * SchoolGroup entities in the database. It extends JpaRepository, providing
+ * CRUD operations and additional query methods for SchoolGroup entities.
+ */
 @Repository
 public interface SchoolGroupRepository extends
         JpaRepository<SchoolGroup, String> {
     
-    Optional<SchoolGroup> findByName (String name);
 }

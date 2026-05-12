@@ -8,6 +8,12 @@ import lombok.Setter;
 
 import java.util.List;
 
+/**
+ * BranchRequest is a data transfer object (DTO) that encapsulates the
+ * information required to create or update a branch in the school management
+ * system. It includes fields for branch identification, contact details,
+ * academic years, status, and the type of request being made.
+ */
 @Getter
 @Setter
 public class BranchRequest {

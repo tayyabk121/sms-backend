@@ -8,7 +8,10 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
 /**
- * Represents an announcement in the school management system.
+ * Entity class representing an Announcement in the school management system.
+ * It contains details about the announcement, including its title, body,
+ * audience, and timestamps. Each announcement is associated with a branch
+ * and an admin user who created it.
  */
 @Entity
 @Table(name = "announcements")
@@ -19,6 +22,7 @@ import java.time.LocalDateTime;
 @Builder
 public class Announcement {
     
+    // Primary key for the Announcement entity, generated as a UUID string.
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
@@ -33,19 +37,25 @@ public class Announcement {
     @JoinColumn(name = "admin_user_id", nullable = false)
     private AdminUser adminUser;
     
+    // Title of the announcement. This field is required.
     @Column(nullable = false)
     private String title;
     
+    // Body of the announcement. This field is required and can be a long text.
     @Column(nullable = false, columnDefinition = "TEXT")
     private String body;
     
+    // Audience for the announcement, defined as an enum. This field is required.
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Audience audience;
     
+    // Indicates whether the announcement is deleted.
+    // This field is required and defaults to false.
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted = false;
     
+    // Timestamp for when the announcement was created. This field is automatically
     @CreationTimestamp // Automates setting the timestamp on create
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;

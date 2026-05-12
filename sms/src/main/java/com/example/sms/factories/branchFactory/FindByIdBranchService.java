@@ -10,20 +10,44 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service class responsible for handling the retrieval of a branch by its ID.
+ * It implements the BranchOperation interface to define the specific
+ * operation for finding a branch by ID.
+ */
 @Log4j2
 @Service
 @RequiredArgsConstructor
 public class FindByIdBranchService implements BranchOperation{
-    
+   
+    /** Validation service for verifying the existence and validity of
+     *  Branch entities. */
     private final BranchValidation branchValidation;
     
+    /** Mapper for converting between Branch entities and BranchResponse objects. */
     private final BranchMapper branchMapper;
     
+        /**
+        * Returns the type of branch request this service handles,
+        * which is FIND_BY_ID.
+        *
+        * @return BranchRequestType.FIND_BY_ID
+        */
     @Override
     public BranchRequestType getRequestType() {
         return BranchRequestType.FIND_BY_ID;
     }
     
+    /**
+     * Performs the operation to find a branch by its ID based on the provided
+     * request. It validates the existence of the branch, retrieves it from
+     * the repository, converts it to a BranchResponse object, and returns
+     * the response.
+     *
+     * @param branchRequest The BranchRequest containing the ID of the branch
+     * to be found.
+     * @return A BranchResponse containing the details of the found branch.
+     */
     @Override
     public BranchResponse performOperation(BranchRequest branchRequest) {
         
