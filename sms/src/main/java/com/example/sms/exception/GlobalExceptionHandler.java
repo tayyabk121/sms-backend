@@ -153,4 +153,23 @@ public class GlobalExceptionHandler {
                 e.getMessage(),
                 request.getRequestURI());
     }
+    
+    /** Handles IdNotFoundException and returns a standardized error response.
+     *
+     * @param e The exception that was thrown.
+     * @param request The HTTP request that caused the exception.
+     * @return An ErrorResponseDTO containing details about the error.
+     */
+    @ExceptionHandler(value = IdNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    private ErrorResponseDTO handleIdNotFoundException(
+            final IdNotFoundException e,
+            final HttpServletRequest request) {
+        
+        return new ErrorResponseDTO(LocalDateTime.now(),
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                e.getMessage(),
+                request.getRequestURI());
+    }
 }

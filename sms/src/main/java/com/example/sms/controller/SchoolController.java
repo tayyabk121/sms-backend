@@ -1,5 +1,7 @@
 package com.example.sms.controller;
 
+import com.example.sms.factories.SubjectFactory.SubjectFactory;
+import com.example.sms.factories.SubjectFactory.SubjectOperations;
 import com.example.sms.factories.academicYearFactory.AcademicYearFactory;
 import com.example.sms.factories.academicYearFactory.AcademicYearOperations;
 import com.example.sms.factories.branchFactory.BranchFactory;
@@ -51,6 +53,9 @@ public class SchoolController {
     /** Factory for handling school class-related operations based on
      * request types. */
     private final SchoolClassFactory schoolClassFactory;
+    
+    /** Factory for handling subject-related operations based on request types. */
+    private final SubjectFactory subjectFactory;
     
     /** Endpoint for handling school group-related requests. It determines the
      * request type and delegates the operation to the appropriate service from
@@ -143,6 +148,24 @@ public class SchoolController {
         
         StudentOperations operation = studentFactory.getOperation(
                 studentRequestType);
+        
+        return operation.performOperation(request);
+    }
+    
+    /** Endpoint for handling subject-related requests. It determines the request
+     * type and delegates the operation to the appropriate service from the
+     * subject factory. */
+    @PostMapping("/subject")
+    public SubjectResponse handleSubject(
+            @RequestBody SubjectRequest request){
+        
+        SubjectRequestType requestType = request.getSubjectRequestType();
+        
+        log.info("Received subject request Type : {}",
+                requestType);
+        
+        SubjectOperations operation = subjectFactory
+                .getOperation(requestType);
         
         return operation.performOperation(request);
     }

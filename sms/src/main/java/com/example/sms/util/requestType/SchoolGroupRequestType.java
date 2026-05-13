@@ -10,5 +10,5 @@ public enum SchoolGroupRequestType {
     FIND_BY_ID,
     FIND_ALL,
     UPDATE,
-    DELETE,
+    DELETE
 }
