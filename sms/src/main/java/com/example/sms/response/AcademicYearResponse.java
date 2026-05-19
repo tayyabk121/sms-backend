@@ -23,7 +23,7 @@ public class AcademicYearResponse {
     
     private String id;
     
-    private String branch;
+    private BranchResponse branch;
     
     private String label; // e.g., "2025-26"
     

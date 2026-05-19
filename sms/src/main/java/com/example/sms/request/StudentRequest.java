@@ -43,5 +43,5 @@ public class StudentRequest {
     
     private LocalDate admittedOn;
     
-    private StudentRequestType studentRequestType;
+    private StudentRequestType requestType;
 }

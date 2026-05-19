@@ -1,15 +1,20 @@
 package com.example.sms.factories.schoolClassFactory;
 
 import com.example.sms.entity.SchoolClass;
+import com.example.sms.mapper.AcademicYearMapper;
+import com.example.sms.mapper.BranchMapper;
 import com.example.sms.mapper.SchoolClassMapper;
 import com.example.sms.repository.SchoolClassRepository;
 import com.example.sms.request.SchoolClassRequest;
+import com.example.sms.response.AcademicYearResponse;
+import com.example.sms.response.BranchResponse;
 import com.example.sms.response.SchoolClassResponse;
 import com.example.sms.util.requestType.SchoolClassRequestType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +33,18 @@ public class FindAllSchoolClassService implements SchoolClassOperation{
     /** Mapper for converting between SchoolClass entities and
      * SchoolClassResponse objects. */
     private final SchoolClassMapper schoolClassMapper;
+    
+    /** Mapper for converting between Branch entities and BranchResponse objects,
+     * used to include branch details in the school class responses. */
+    private final BranchMapper branchMapper;
+    
+    /** Mapper for converting between AcademicYear entities and AcademicYearResponse objects,
+     * used to include academic year details in the school class responses. */
+    private final AcademicYearMapper academicYearMapper;
+    
+    
+    private final List<SchoolClassResponse> schoolClassResponseList =
+            new ArrayList<>();
     
     /**
      * Returns the type of school class request this service handles,
@@ -56,8 +73,26 @@ public class FindAllSchoolClassService implements SchoolClassOperation{
         
         List<SchoolClass> list = schoolClassRepository.findAll();
         
-        List<SchoolClassResponse> schoolClassResponseList = list.stream()
-                .map(schoolClassMapper::toResponse).toList();
+
+        
+        for (SchoolClass schoolClass : list){
+            
+            log.info("Mapping school class with ID: {}", schoolClass.getId());
+            
+            BranchResponse branchResponse = branchMapper.toResponse(
+                    schoolClass.getBranch(), null, null);
+            
+            AcademicYearResponse academicYearResponse = academicYearMapper
+                    .toResponse(
+                            schoolClass.getAcademicYear(), null);
+            
+            SchoolClassResponse schoolClassResponse = schoolClassMapper.
+                    toResponse(schoolClass, branchResponse,
+                    academicYearResponse);
+            
+            schoolClassResponseList.add(schoolClassResponse);
+            
+        }
         
         return SchoolClassResponse.builder()
                 .schoolClassResponseList(schoolClassResponseList)

@@ -2,10 +2,13 @@ package com.example.sms.factories.academicYearFactory;
 
 import com.example.sms.entity.AcademicYear;
 import com.example.sms.mapper.AcademicYearMapper;
+import com.example.sms.mapper.BranchMapper;
 import com.example.sms.request.AcademicYearRequest;
 import com.example.sms.response.AcademicYearResponse;
+import com.example.sms.response.BranchResponse;
 import com.example.sms.util.requestType.AcademicYearRequestType;
 import com.example.sms.validation.AcademicYearValidation;
+import com.example.sms.validation.BranchValidation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -29,6 +32,10 @@ public class FindByIdAcademicYearService implements AcademicYearOperations{
     /** Mapper for converting between AcademicYear entities and
      * AcademicYearResponse objects. */
     private final AcademicYearMapper academicYearMapper;
+    
+    /** Mapper for converting between Branch entities and BranchResponse objects,
+     * used to include branch details in the academic year response. */
+    private final BranchMapper branchMapper;
     
     /**
      * Returns the type of academic year request this service handles,
@@ -65,6 +72,10 @@ public class FindByIdAcademicYearService implements AcademicYearOperations{
         
         log.info("Academic Year found: {}", academicYear);
         
-        return academicYearMapper.toResponse(academicYear);
+        BranchResponse branchResponse = branchMapper.toResponse(
+                academicYear.getBranch(),null,null);
+        
+        
+        return academicYearMapper.toResponse(academicYear, branchResponse);
     }
 }

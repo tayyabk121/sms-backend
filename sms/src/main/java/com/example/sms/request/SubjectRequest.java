@@ -15,5 +15,5 @@ public class SubjectRequest {
     private String id;
     private String branchId;
     private String name;
-    private SubjectRequestType subjectRequestType;
+    private SubjectRequestType requestType;
 }

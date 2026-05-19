@@ -3,7 +3,11 @@ package com.example.sms.mapper;
 import com.example.sms.entity.Branch;
 import com.example.sms.entity.SchoolGroup;
 import com.example.sms.request.BranchRequest;
+import com.example.sms.response.AcademicYearResponse;
 import com.example.sms.response.BranchResponse;
+import com.example.sms.response.SchoolGroupResponse;
+
+import java.util.List;
 
 /**
  * Mapper interface for converting between Branch entities and their
@@ -25,5 +29,7 @@ public interface BranchMapper {
     
     /** Converts a Branch entity to a BranchResponse,
      * which can be returned to the client. */
-    BranchResponse toResponse(Branch branch);
+    BranchResponse toResponse(Branch branch,
+                              SchoolGroupResponse schoolGroupResponse,
+                              List<AcademicYearResponse> academicYearResponses);
 }

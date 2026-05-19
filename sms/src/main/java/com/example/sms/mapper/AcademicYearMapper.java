@@ -4,6 +4,7 @@ import com.example.sms.entity.AcademicYear;
 import com.example.sms.entity.Branch;
 import com.example.sms.request.AcademicYearRequest;
 import com.example.sms.response.AcademicYearResponse;
+import com.example.sms.response.BranchResponse;
 
 /**
  * Mapper interface for converting between AcademicYear entities and their
@@ -27,5 +28,6 @@ public interface AcademicYearMapper {
     
     /** Converts an AcademicYear entity to an AcademicYearResponse, which can be
      * returned to the client. */
-    AcademicYearResponse toResponse(AcademicYear entity);
+    AcademicYearResponse toResponse(AcademicYear entity,
+                                    BranchResponse branchResponse);
 }

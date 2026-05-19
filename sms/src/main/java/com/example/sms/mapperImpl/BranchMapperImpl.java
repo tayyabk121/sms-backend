@@ -131,23 +131,29 @@ public class BranchMapperImpl implements BranchMapper {
      * corresponding response objects using the injected mappers. */
     @Override
     public BranchResponse toResponse(
-            Branch branch) {
+            Branch branch,
+            SchoolGroupResponse schoolGroupResponse,
+            List<AcademicYearResponse> academicYearList) {
         
-        SchoolGroupResponse schoolGroupResponse = schoolGroupMapper.toResponse(
-                branch.getSchoolGroupId());
-        
-        List<AcademicYearResponse> academicYearList = branch.getAcademicYearId()
-                .stream().map(academicYearMapper::toResponse).toList();
+//        SchoolGroupResponse schoolGroupResponse = schoolGroupMapper.toResponse(
+//                branch.getSchoolGroupId());
+//
+//            List<AcademicYearResponse> academicYearList = branch
+//                    .getAcademicYearId()
+//                    .stream()
+//                    .map(year -> academicYearMapper.toResponse(
+//                            year, null)) // BranchResponse is not needed here
+//                    .collect(Collectors.toList());
         
         return BranchResponse.builder()
                 .id(branch.getId())
-                .schoolGroupId(schoolGroupResponse)
+                .schoolGroup(schoolGroupResponse)
                 .name(branch.getName())
                 .address(branch.getAddress())
                 .city(branch.getCity())
                 .phoneNumber(branch.getPhoneNumber())
                 .email(branch.getEmail())
-                .academicYearId(academicYearList)
+                .academicYear(academicYearList)
                 .status(branch.getStatus())
                 .build();
     }

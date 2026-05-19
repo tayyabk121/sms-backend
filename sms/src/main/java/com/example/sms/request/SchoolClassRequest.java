@@ -23,5 +23,5 @@ public class SchoolClassRequest {
     private String name;
     private Integer gradeLevel;
     private String section;
-    private SchoolClassRequestType schoolClassRequestType;
+    private SchoolClassRequestType requestType;
 }

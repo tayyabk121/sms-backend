@@ -29,6 +29,6 @@ public class AcademicYearRequest {
     
     private Boolean isCurrent;
     
-    private AcademicYearRequestType academicYearRequestType;
+    private AcademicYearRequestType requestType;
     
 }

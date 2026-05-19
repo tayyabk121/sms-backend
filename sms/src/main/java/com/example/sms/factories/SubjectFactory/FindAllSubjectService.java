@@ -1,15 +1,19 @@
 package com.example.sms.factories.SubjectFactory;
 
+import com.example.sms.entity.Branch;
 import com.example.sms.entity.Subject;
+import com.example.sms.mapper.BranchMapper;
 import com.example.sms.mapper.SubjectMapper;
 import com.example.sms.repository.SubjectRepository;
 import com.example.sms.request.SubjectRequest;
+import com.example.sms.response.BranchResponse;
 import com.example.sms.response.SubjectResponse;
 import com.example.sms.util.requestType.SubjectRequestType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,13 +26,17 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class FindAllSubjectService implements SubjectOperations{
-   
+
     /** Repository for accessing Subject entities in the database. */
     private final SubjectRepository subjectRepository;
-    
+
     /** Mapper for converting between Subject entities and DTOs. */
     private final SubjectMapper subjectMapper;
     
+    /** Mapper for converting between Branch entities and DTOs, used to include branch
+     * details in the subject responses. */
+    private final BranchMapper branchMapper;
+
     /** Method to get the type of request this service handles, which is FIND_ALL in
      * this case. This method is used to identify the type of operation that this
      * service performs when processing a SubjectRequest. */
@@ -36,7 +44,7 @@ public class FindAllSubjectService implements SubjectOperations{
     public SubjectRequestType getRequestType() {
         return SubjectRequestType.FIND_ALL;
     }
-    
+
     /** Method to perform the operation of finding all subjects.
      * This method retrieves all Subject entities from the database using the
      * SubjectRepository, maps each Subject entity to a SubjectResponse using
@@ -45,13 +53,26 @@ public class FindAllSubjectService implements SubjectOperations{
      * map the list of Subject entities to a list of SubjectResponse objects. */
     @Override
     public SubjectResponse performOperation(SubjectRequest request) {
-        
+
         log.info("Performing FIND_ALL operation for subjects");
-        
+
         List<Subject> list = subjectRepository.findAll();
         
-        List<SubjectResponse> subjectResponseList = list.stream().map(
-                subjectMapper::toResponse).toList();
+        List<SubjectResponse> subjectResponseList = new ArrayList<>();
+        
+        for (Subject subject : list){
+            log.info("Subject found: {}", subject.getName());
+            
+            Branch branch = subject.getBranch();
+            BranchResponse branchResponse = branchMapper.toResponse(branch,
+                    null, null);
+            
+            SubjectResponse response = subjectMapper.toResponse(
+                    subject, branchResponse);
+            
+            subjectResponseList.add(response);
+            
+        }
         
         return SubjectResponse.builder()
                 .subjectResponseList(subjectResponseList)

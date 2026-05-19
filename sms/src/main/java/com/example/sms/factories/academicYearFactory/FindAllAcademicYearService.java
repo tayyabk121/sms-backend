@@ -1,15 +1,19 @@
 package com.example.sms.factories.academicYearFactory;
 
 import com.example.sms.entity.AcademicYear;
+import com.example.sms.entity.Branch;
 import com.example.sms.mapper.AcademicYearMapper;
+import com.example.sms.mapper.BranchMapper;
 import com.example.sms.repository.AcademicYearRepository;
 import com.example.sms.request.AcademicYearRequest;
 import com.example.sms.response.AcademicYearResponse;
+import com.example.sms.response.BranchResponse;
 import com.example.sms.util.requestType.AcademicYearRequestType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,6 +34,10 @@ public class FindAllAcademicYearService implements AcademicYearOperations{
     
     /** Repository for performing CRUD operations on AcademicYear entities. */
     private final AcademicYearRepository academicYearRepository;
+    
+    /** Mapper for converting between Branch entities and BranchResponse objects,
+     * used to include branch details in the academic year responses. */
+    private final BranchMapper branchMapper;
     
     /**
      * Returns the type of academic year request this service handles,
@@ -58,12 +66,25 @@ public class FindAllAcademicYearService implements AcademicYearOperations{
         
         List<AcademicYear> academicYearList = academicYearRepository.findAll();
         
-        List<AcademicYearResponse> list = academicYearList.stream().map(
-                academicYearMapper::toResponse).toList();
+        List<AcademicYearResponse> academicYearResponseList =
+                new ArrayList<>();
         
+        for(AcademicYear academicYear : academicYearList){
+            log.info("Mapping Academic Year with ID: {} to response",
+                    academicYear.getId());
+            
+            BranchResponse branchResponse = branchMapper.toResponse(
+                    academicYear.getBranch(),null,null);
+            
+            AcademicYearResponse academicYearResponse = academicYearMapper
+                    .toResponse(academicYear, branchResponse);
+            
+            academicYearResponseList.add(academicYearResponse);
+            
+        }
         
         return AcademicYearResponse.builder()
-                .academicYearResponseList(list)
+                .academicYearResponseList(academicYearResponseList)
                 .build();
     }
 }

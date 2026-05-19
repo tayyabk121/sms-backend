@@ -36,5 +36,5 @@ public class BranchRequest {
     
     private BranchStatus status;
     
-    private BranchRequestType branchRequestType;
+    private BranchRequestType requestType;
 }

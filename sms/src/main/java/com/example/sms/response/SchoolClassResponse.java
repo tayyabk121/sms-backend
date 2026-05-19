@@ -20,8 +20,8 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL) // Exclude null fields from JSON response
 public class SchoolClassResponse {
     private String id;
-    private String branchId;
-    private String academicYearId;
+    private BranchResponse branch;
+    private AcademicYearResponse academicYear;
     private String name;
     private Integer gradeLevel;
     private String section;

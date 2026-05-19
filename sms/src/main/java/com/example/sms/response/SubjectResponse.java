@@ -20,7 +20,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SubjectResponse {
     private String id;
-    private String branchId;
+    private BranchResponse branch;
     private String name;
     private String message;
     private List<SubjectResponse> subjectResponseList;

@@ -3,6 +3,7 @@ package com.example.sms.mapper;
 import com.example.sms.entity.Branch;
 import com.example.sms.entity.Subject;
 import com.example.sms.request.SubjectRequest;
+import com.example.sms.response.BranchResponse;
 import com.example.sms.response.SubjectResponse;
 
 /**
@@ -25,5 +26,6 @@ public interface SubjectMapper {
     
     /** Converts a Subject entity to a SubjectResponse, which can be returned to
      * the client. */
-    SubjectResponse toResponse(Subject subject);
+    SubjectResponse toResponse(Subject subject,
+                               BranchResponse branchResponse);
 }

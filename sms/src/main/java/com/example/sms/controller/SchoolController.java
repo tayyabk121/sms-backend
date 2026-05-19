@@ -65,7 +65,7 @@ public class SchoolController {
             @RequestBody SchoolGroupRequest request){
         
         SchoolGroupRequestType schoolGroupRequestType =
-                request.getSchoolGroupRequestType();
+                request.getRequestType();
         
         log.info("Received school group request Type : {}",
                 schoolGroupRequestType);
@@ -84,7 +84,7 @@ public class SchoolController {
             @RequestBody BranchRequest request){
         
         BranchRequestType branchRequestType =
-                request.getBranchRequestType();
+                request.getRequestType();
         
         log.info("Received branch request Type : {}",
                 branchRequestType);
@@ -103,7 +103,7 @@ public class SchoolController {
             @RequestBody AcademicYearRequest request){
         
         AcademicYearRequestType academicYearRequestType =
-                request.getAcademicYearRequestType();
+                request.getRequestType();
         
         log.info("Received academic year request Type : {}",
                 academicYearRequestType);
@@ -122,7 +122,7 @@ public class SchoolController {
             @RequestBody SchoolClassRequest request){
         
         SchoolClassRequestType schoolClassRequestType =
-                request.getSchoolClassRequestType();
+                request.getRequestType();
         
         log.info("Received school class request Type : {}",
                 schoolClassRequestType);
@@ -141,7 +141,7 @@ public class SchoolController {
             @RequestBody StudentRequest request){
         
         StudentRequestType studentRequestType = request
-                .getStudentRequestType();
+                .getRequestType();
         
         log.info("Received student request Type : {}",
                 studentRequestType);
@@ -159,7 +159,7 @@ public class SchoolController {
     public SubjectResponse handleSubject(
             @RequestBody SubjectRequest request){
         
-        SubjectRequestType requestType = request.getSubjectRequestType();
+        SubjectRequestType requestType = request.getRequestType();
         
         log.info("Received subject request Type : {}",
                 requestType);

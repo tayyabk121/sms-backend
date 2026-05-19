@@ -5,6 +5,7 @@ import com.example.sms.entity.Branch;
 import com.example.sms.mapper.AcademicYearMapper;
 import com.example.sms.request.AcademicYearRequest;
 import com.example.sms.response.AcademicYearResponse;
+import com.example.sms.response.BranchResponse;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
@@ -65,10 +66,11 @@ public class AcademicYearMapperImpl implements AcademicYearMapper {
     /** Converts an AcademicYear entity to an AcademicYearResponse, which can be
      * returned to the client. */
     @Override
-    public AcademicYearResponse toResponse(AcademicYear academicYear) {
+    public AcademicYearResponse toResponse(AcademicYear academicYear,
+                                           BranchResponse branchResponse) {
         return AcademicYearResponse.builder()
                 .id(academicYear.getId())
-                .branch(academicYear.getBranch().getId())
+                .branch(branchResponse)
                 .label(academicYear.getLabel())
                 .startDate(academicYear.getStartDate())
                 .endDate(academicYear.getEndDate())

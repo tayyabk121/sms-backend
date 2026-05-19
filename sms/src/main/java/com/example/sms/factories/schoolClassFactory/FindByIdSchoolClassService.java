@@ -1,8 +1,12 @@
 package com.example.sms.factories.schoolClassFactory;
 
 import com.example.sms.entity.SchoolClass;
+import com.example.sms.mapper.AcademicYearMapper;
+import com.example.sms.mapper.BranchMapper;
 import com.example.sms.mapper.SchoolClassMapper;
 import com.example.sms.request.SchoolClassRequest;
+import com.example.sms.response.AcademicYearResponse;
+import com.example.sms.response.BranchResponse;
 import com.example.sms.response.SchoolClassResponse;
 import com.example.sms.util.requestType.SchoolClassRequestType;
 import com.example.sms.validation.SchoolClassValidation;
@@ -27,6 +31,15 @@ public class FindByIdSchoolClassService implements SchoolClassOperation{
     /** Mapper for converting between SchoolClass entities and
      * SchoolClassResponse objects. */
     private final SchoolClassMapper schoolClassMapper;
+    
+    /** Mapper for converting between Branch entities and BranchResponse objects,
+     * used to include branch details in the school class response. */
+    private final BranchMapper branchMapper;
+    
+    /** Response object for AcademicYear, used to include academic year
+     * details in the
+     * school class response. */
+    private final AcademicYearMapper academicYearMapper;
     
     /**
      * Returns the type of school class request this service handles,
@@ -65,6 +78,13 @@ public class FindByIdSchoolClassService implements SchoolClassOperation{
         log.info("School class with id: {} found successfully",
                 schoolClassId);
         
-        return schoolClassMapper.toResponse(schoolClass);
+        BranchResponse branchResponse = branchMapper.toResponse(
+                schoolClass.getBranch(), null, null);
+        
+        AcademicYearResponse academicYearResponse = academicYearMapper.toResponse(
+                schoolClass.getAcademicYear(), null);
+        
+        return schoolClassMapper.toResponse(
+                schoolClass, branchResponse, academicYearResponse);
     }
 }

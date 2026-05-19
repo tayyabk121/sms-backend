@@ -23,7 +23,7 @@ public class BranchResponse {
     
     private String id;
     
-    private SchoolGroupResponse schoolGroupId;
+    private SchoolGroupResponse schoolGroup;
     
     private String name;
     
@@ -35,7 +35,7 @@ public class BranchResponse {
     
     private String email;
     
-    private List<AcademicYearResponse> academicYearId;
+    private List<AcademicYearResponse> academicYear;
     
     private BranchStatus status;
     

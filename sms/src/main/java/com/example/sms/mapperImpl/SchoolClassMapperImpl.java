@@ -5,6 +5,8 @@ import com.example.sms.entity.Branch;
 import com.example.sms.entity.SchoolClass;
 import com.example.sms.mapper.SchoolClassMapper;
 import com.example.sms.request.SchoolClassRequest;
+import com.example.sms.response.AcademicYearResponse;
+import com.example.sms.response.BranchResponse;
 import com.example.sms.response.SchoolClassResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -86,14 +88,16 @@ public class SchoolClassMapperImpl implements SchoolClassMapper {
      * entity data. It also includes the IDs of the associated Branch and AcademicYear
      * for reference in the response. */
     @Override
-    public SchoolClassResponse toResponse(SchoolClass schoolClass) {
+    public SchoolClassResponse toResponse(SchoolClass schoolClass,
+                                          BranchResponse branchResponse,
+                                          AcademicYearResponse academicYearResponse) {
         
         log.info("Mapping SchoolClass entity to SchoolClassResponse");
         
         return SchoolClassResponse.builder()
                 .id(schoolClass.getId())
-                .branchId(schoolClass.getBranch().getId())
-                .academicYearId(schoolClass.getAcademicYear().getId())
+                .branch(branchResponse)
+                .academicYear(academicYearResponse)
                 .name(schoolClass.getName())
                 .gradeLevel(schoolClass.getGradeLevel())
                 .section(schoolClass.getSection())

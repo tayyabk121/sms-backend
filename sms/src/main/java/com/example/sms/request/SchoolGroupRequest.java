@@ -25,5 +25,5 @@ public class SchoolGroupRequest {
     
     private String address;
     
-    private SchoolGroupRequestType schoolGroupRequestType;
+    private SchoolGroupRequestType requestType;
 }

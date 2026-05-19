@@ -1,14 +1,22 @@
 package com.example.sms.factories.branchFactory;
 
+import com.example.sms.entity.AcademicYear;
 import com.example.sms.entity.Branch;
+import com.example.sms.mapper.AcademicYearMapper;
 import com.example.sms.mapper.BranchMapper;
+import com.example.sms.mapper.SchoolGroupMapper;
 import com.example.sms.request.BranchRequest;
+import com.example.sms.response.AcademicYearResponse;
 import com.example.sms.response.BranchResponse;
+import com.example.sms.response.SchoolGroupResponse;
 import com.example.sms.util.requestType.BranchRequestType;
 import com.example.sms.validation.BranchValidation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Service class responsible for handling the retrieval of a branch by its ID.
@@ -26,6 +34,17 @@ public class FindByIdBranchService implements BranchOperation{
     
     /** Mapper for converting between Branch entities and BranchResponse objects. */
     private final BranchMapper branchMapper;
+    
+    /** Mapper for converting between SchoolGroup entities and
+     * SchoolGroupResponse objects, used to include school group details in the
+     * branch response. */
+    private final SchoolGroupMapper schoolGroupMapper;
+    
+    /** Mapper for converting between AcademicYear entities and
+     * AcademicYearResponse objects, used to include academic year details in the
+     * branch response. */
+    private final AcademicYearMapper academicYearMapper;
+    
     
         /**
         * Returns the type of branch request this service handles,
@@ -61,6 +80,23 @@ public class FindByIdBranchService implements BranchOperation{
         
         log.info("Branch found: {}", branch.getId());
         
-        return branchMapper.toResponse(branch);
+        SchoolGroupResponse schoolGroupResponse = schoolGroupMapper
+                .toResponse(branch.getSchoolGroupId());
+        
+        List<AcademicYearResponse> academicYearResponseList =
+                new ArrayList<>();
+        
+        for(AcademicYear academicYear :  branch.getAcademicYearId()){
+            log.info("Mapping Academic Year with ID: {} to response",
+                    academicYear.getId());
+            
+            AcademicYearResponse academicYearResponse = academicYearMapper
+                    .toResponse(academicYear,null);
+            
+            academicYearResponseList.add(academicYearResponse);
+        }
+        
+        return branchMapper.toResponse(
+                branch, schoolGroupResponse, academicYearResponseList);
     }
 }

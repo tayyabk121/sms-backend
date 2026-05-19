@@ -4,6 +4,7 @@ import com.example.sms.entity.Branch;
 import com.example.sms.entity.Subject;
 import com.example.sms.mapper.SubjectMapper;
 import com.example.sms.request.SubjectRequest;
+import com.example.sms.response.BranchResponse;
 import com.example.sms.response.SubjectResponse;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
@@ -60,11 +61,12 @@ public class SubjectMapperImpl implements SubjectMapper {
      * the entity data. It maps fields such as name and code from the Subject
      * entity to the corresponding fields in the SubjectResponse. */
     @Override
-    public SubjectResponse toResponse(Subject subject) {
+    public SubjectResponse toResponse(Subject subject,
+                                      BranchResponse branchResponse) {
         return SubjectResponse.builder()
                 .id(subject.getId())
                 .name(subject.getName())
-                .branchId(subject.getBranch().getId())
+                .branch(branchResponse)
                 .build();
     }
 }

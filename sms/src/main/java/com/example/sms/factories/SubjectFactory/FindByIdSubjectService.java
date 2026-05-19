@@ -1,8 +1,10 @@
 package com.example.sms.factories.SubjectFactory;
 
 import com.example.sms.entity.Subject;
+import com.example.sms.mapper.BranchMapper;
 import com.example.sms.mapper.SubjectMapper;
 import com.example.sms.request.SubjectRequest;
+import com.example.sms.response.BranchResponse;
 import com.example.sms.response.SubjectResponse;
 import com.example.sms.util.requestType.SubjectRequestType;
 import com.example.sms.validation.SubjectValidation;
@@ -30,6 +32,10 @@ public class FindByIdSubjectService implements SubjectOperations{
      * SubjectResponse that can be returned to the client. */
     private final SubjectMapper subjectMapper;
     
+    /** Mapper for converting between Branch entities and their corresponding response
+     * objects, used to include branch details in the subject response. */
+    private final BranchMapper branchMapper;
+    
     /** Returns the type of request that this service handles, which is
      * FIND_BY_ID. */
     @Override
@@ -50,6 +56,9 @@ public class FindByIdSubjectService implements SubjectOperations{
         Subject subject = subjectValidation.findById(
                 request.getId());
         
-        return subjectMapper.toResponse(subject);
+        BranchResponse branchResponse = branchMapper.toResponse(
+                subject.getBranch(),null,null);
+        
+        return subjectMapper.toResponse(subject,branchResponse);
     }
 }

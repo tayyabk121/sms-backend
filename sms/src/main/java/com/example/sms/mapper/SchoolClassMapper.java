@@ -4,6 +4,8 @@ import com.example.sms.entity.AcademicYear;
 import com.example.sms.entity.Branch;
 import com.example.sms.entity.SchoolClass;
 import com.example.sms.request.SchoolClassRequest;
+import com.example.sms.response.AcademicYearResponse;
+import com.example.sms.response.BranchResponse;
 import com.example.sms.response.SchoolClassResponse;
 
 /**
@@ -31,5 +33,7 @@ public interface SchoolClassMapper {
     
     /** Converts a SchoolClass entity to a SchoolClassResponse,
      * which can be returned to the client. */
-    SchoolClassResponse toResponse(SchoolClass schoolClass);
+    SchoolClassResponse toResponse(SchoolClass schoolClass,
+                                   BranchResponse branchResponse,
+                                   AcademicYearResponse academicYearResponse);
 }
