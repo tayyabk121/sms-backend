@@ -20,8 +20,54 @@ spring:
       dialect: org.hibernate.dialect.MySQLDialect
       format_sql: true
 
+  redis:
+    host: localhost
+    port: 6379
+    lettuce:
+      pool:
+        max-active: 16
+        max-idle: 8
+        min-idle: 2
+        shutdown-timeout: 100ms
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.json.trusted.packages: '*'
+
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ansariayan8952@gmail.com
+    password: genunxexooeisqns
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
 server:
   port: 8082
 
-secret:
-  key: TaK+HaV^uvCHEFsEVfypW#7g9^k*Z8$V
+jwt:
+  secret: dGhpcy1pcy1hLXZlcnktc2VjdXJlLWFuZC1sb25nLXNlY3JldC1rZXktZm9yLWhzMjU2LWFsZ29yaXRobQ
+  access-token-expiration: 7200000
+  refresh-token-expiration: 2592000000
+
+twilio:
+  account-sid: ACa8e14b141040ae8b8e2af9946b22a53a
+  auth-token: 795458211e8981a7bacc36023e4d0f54
+  whatsapp:
+        from: whatsapp:+14155238886
