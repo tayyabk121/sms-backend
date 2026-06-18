@@ -1,6 +1,6 @@
 package com.example.sms.mapper;
 
-import com.example.sms.entity.SchoolGroup;
+import com.example.sms.model.SchoolGroup;
 import com.example.sms.request.SchoolGroupRequest;
 import com.example.sms.response.SchoolGroupResponse;
 

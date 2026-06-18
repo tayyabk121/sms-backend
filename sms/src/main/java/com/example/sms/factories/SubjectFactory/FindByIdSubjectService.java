@@ -1,13 +1,13 @@
 package com.example.sms.factories.SubjectFactory;
 
-import com.example.sms.entity.Subject;
+import com.example.sms.model.Subject;
 import com.example.sms.mapper.BranchMapper;
 import com.example.sms.mapper.SubjectMapper;
 import com.example.sms.request.SubjectRequest;
 import com.example.sms.response.BranchResponse;
 import com.example.sms.response.SubjectResponse;
-import com.example.sms.util.requestType.SubjectRequestType;
-import com.example.sms.validation.SubjectValidation;
+import com.example.sms.util.RequestType;
+import com.example.sms.helper.SubjectHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class FindByIdSubjectService implements SubjectOperations{
    
     /** Validation component for Subject entities, used to validate the request and
      * retrieve the Subject entity based on the provided ID. */
-    private final SubjectValidation subjectValidation;
+    private final SubjectHelper subjectValidation;
     
     /** Mapper for converting between Subject entities and their corresponding response
      * objects. This is used to map the retrieved Subject entity to a
@@ -39,8 +39,8 @@ public class FindByIdSubjectService implements SubjectOperations{
     /** Returns the type of request that this service handles, which is
      * FIND_BY_ID. */
     @Override
-    public SubjectRequestType getRequestType() {
-        return SubjectRequestType.FIND_BY_ID;
+    public RequestType getRequestType() {
+        return RequestType.FIND_BY_ID;
     }
     
     /** Performs the FIND_BY_ID operation for a Subject entity. This method takes a

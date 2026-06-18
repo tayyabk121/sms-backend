@@ -1,7 +1,7 @@
 package com.example.sms.mapperImpl;
 
-import com.example.sms.entity.AcademicYear;
-import com.example.sms.entity.Branch;
+import com.example.sms.model.AcademicYear;
+import com.example.sms.model.Branch;
 import com.example.sms.mapper.AcademicYearMapper;
 import com.example.sms.request.AcademicYearRequest;
 import com.example.sms.response.AcademicYearResponse;

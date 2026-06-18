@@ -1,7 +1,7 @@
 package com.example.sms.request;
 
 
-import com.example.sms.util.requestType.AcademicYearRequestType;
+import com.example.sms.util.RequestType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,6 +29,6 @@ public class AcademicYearRequest {
     
     private Boolean isCurrent;
     
-    private AcademicYearRequestType requestType;
+    private RequestType requestType;
     
 }

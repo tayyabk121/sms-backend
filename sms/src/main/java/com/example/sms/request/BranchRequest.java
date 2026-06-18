@@ -1,8 +1,8 @@
 package com.example.sms.request;
 
-import com.example.sms.entity.AcademicYear;
+import com.example.sms.model.AcademicYear;
 import com.example.sms.util.BranchStatus;
-import com.example.sms.util.requestType.BranchRequestType;
+import com.example.sms.util.RequestType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,5 +36,5 @@ public class BranchRequest {
     
     private BranchStatus status;
     
-    private BranchRequestType requestType;
+    private RequestType requestType;
 }

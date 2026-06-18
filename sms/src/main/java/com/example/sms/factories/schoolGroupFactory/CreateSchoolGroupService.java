@@ -1,12 +1,12 @@
 package com.example.sms.factories.schoolGroupFactory;
 
-import com.example.sms.entity.SchoolGroup;
-import com.example.sms.exception.SchoolGroupFailedException;
+import com.example.sms.model.SchoolGroup;
+import com.example.sms.exception.CreateFailedException;
 import com.example.sms.mapper.SchoolGroupMapper;
 import com.example.sms.repository.SchoolGroupRepository;
 import com.example.sms.request.SchoolGroupRequest;
 import com.example.sms.response.SchoolGroupResponse;
-import com.example.sms.util.requestType.SchoolGroupRequestType;
+import com.example.sms.util.RequestType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -32,11 +32,11 @@ public class CreateSchoolGroupService implements SchoolGroupOperations {
      * Returns the type of school group request this service handles,
      * which is CREATE.
      *
-     * @return SchoolGroupRequestType.CREATE
+     * @return RequestType.CREATE
      */
     @Override
-    public SchoolGroupRequestType getSchoolGroupRequestType() {
-        return SchoolGroupRequestType.CREATE;
+    public RequestType getSchoolGroupRequestType() {
+        return RequestType.CREATE;
     }
     
     /**
@@ -48,7 +48,7 @@ public class CreateSchoolGroupService implements SchoolGroupOperations {
      * @param request The SchoolGroupRequest containing the details of the
      * school group to be created.
      * @return A SchoolGroupResponse indicating the success of the operation.
-     * @throws SchoolGroupFailedException if there is an error during the
+     * @throws CreateFailedException if there is an error during the
      * creation process, such as duplicate entries.
      */
     @Override
@@ -62,7 +62,7 @@ public class CreateSchoolGroupService implements SchoolGroupOperations {
             schoolGroupRepository.save(entity);
             
         }catch (Exception e){
-            throw new SchoolGroupFailedException(
+            throw new CreateFailedException(
                     "Name, mobile number and Email Already Exists : "
                             + request.getName());
         }

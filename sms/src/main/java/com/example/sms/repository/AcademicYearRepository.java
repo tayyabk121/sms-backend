@@ -1,7 +1,6 @@
 package com.example.sms.repository;
 
-import com.example.sms.entity.AcademicYear;
-import com.example.sms.entity.Branch;
+import com.example.sms.model.AcademicYear;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

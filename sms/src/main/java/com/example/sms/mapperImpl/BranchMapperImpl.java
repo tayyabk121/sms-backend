@@ -1,8 +1,8 @@
 package com.example.sms.mapperImpl;
 
-import com.example.sms.entity.AcademicYear;
-import com.example.sms.entity.Branch;
-import com.example.sms.entity.SchoolGroup;
+import com.example.sms.model.AcademicYear;
+import com.example.sms.model.Branch;
+import com.example.sms.model.SchoolGroup;
 import com.example.sms.mapper.AcademicYearMapper;
 import com.example.sms.mapper.BranchMapper;
 import com.example.sms.mapper.SchoolGroupMapper;

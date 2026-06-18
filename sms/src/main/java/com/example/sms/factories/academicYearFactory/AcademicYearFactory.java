@@ -1,6 +1,6 @@
 package com.example.sms.factories.academicYearFactory;
 
-import com.example.sms.util.requestType.AcademicYearRequestType;
+import com.example.sms.util.RequestType;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -22,9 +22,9 @@ public class AcademicYearFactory {
     /** List of AcademicYearOperations implementations to be injected by Spring. */
     private final List<AcademicYearOperations> academicYearOperations;
     
-    /** Map to hold the association between AcademicYearRequestType and
+    /** Map to hold the association between RequestType and
      *  AcademicYearOperations implementations. */
-    private final Map<AcademicYearRequestType,
+    private final Map<RequestType,
             AcademicYearOperations> academicYearOperationsMap = new HashMap<>();
     
     /** Method annotated with @PostConstruct to populate the academicYearOperationsMap
@@ -44,7 +44,7 @@ public class AcademicYearFactory {
      *  operation. If no operation is found for the given request type, it
      *  returns null. */
     public AcademicYearOperations getOperation(
-            final AcademicYearRequestType requestType){
+            final RequestType requestType){
         return academicYearOperationsMap.get(requestType);
     }
 }

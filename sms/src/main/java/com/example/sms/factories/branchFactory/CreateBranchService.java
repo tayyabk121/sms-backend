@@ -1,13 +1,13 @@
 package com.example.sms.factories.branchFactory;
 
-import com.example.sms.entity.Branch;
-import com.example.sms.entity.SchoolGroup;
+import com.example.sms.model.Branch;
+import com.example.sms.model.SchoolGroup;
 import com.example.sms.mapper.BranchMapper;
 import com.example.sms.repository.BranchRepository;
 import com.example.sms.request.BranchRequest;
 import com.example.sms.response.BranchResponse;
-import com.example.sms.util.requestType.BranchRequestType;
-import com.example.sms.validation.SchoolGroupValidation;
+import com.example.sms.util.RequestType;
+import com.example.sms.helper.SchoolGroupHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class CreateBranchService implements BranchOperation{
     
     /** Validation service for verifying the existence and validity of
      *  SchoolGroup entities. */
-    private final SchoolGroupValidation schoolGroupValidation;
+    private final SchoolGroupHelper schoolGroupValidation;
     
     /** Repository for performing CRUD operations on Branch entities. */
     private final BranchRepository branchRepository;
@@ -36,11 +36,11 @@ public class CreateBranchService implements BranchOperation{
      * Returns the type of branch request this service handles,
      * which is CREATE.
      *
-     * @return BranchRequestType.CREATE
+     * @return RequestType.CREATE
      */
     @Override
-    public BranchRequestType getRequestType() {
-        return BranchRequestType.CREATE;
+    public RequestType getRequestType() {
+        return RequestType.CREATE;
     }
     
     /**

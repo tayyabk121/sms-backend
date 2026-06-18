@@ -2,7 +2,7 @@ package com.example.sms.factories.schoolGroupFactory;
 
 import com.example.sms.request.SchoolGroupRequest;
 import com.example.sms.response.SchoolGroupResponse;
-import com.example.sms.util.requestType.SchoolGroupRequestType;
+import com.example.sms.util.RequestType;
 
 /**
  * Interface defining operations for handling school group requests.
@@ -15,9 +15,9 @@ public interface SchoolGroupOperations {
      * Returns the type of school group request that this operation
      * implementation handles.
      *
-     * @return The SchoolGroupRequestType associated with this operation.
+     * @return The RequestType associated with this operation.
      */
-    SchoolGroupRequestType getSchoolGroupRequestType();
+    RequestType getSchoolGroupRequestType();
     
     /**
      * Performs the specific operation defined by the implementation

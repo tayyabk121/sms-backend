@@ -1,6 +1,6 @@
 package com.example.sms.factories.schoolClassFactory;
 
-import com.example.sms.entity.SchoolClass;
+import com.example.sms.model.SchoolClass;
 import com.example.sms.mapper.AcademicYearMapper;
 import com.example.sms.mapper.BranchMapper;
 import com.example.sms.mapper.SchoolClassMapper;
@@ -9,7 +9,7 @@ import com.example.sms.request.SchoolClassRequest;
 import com.example.sms.response.AcademicYearResponse;
 import com.example.sms.response.BranchResponse;
 import com.example.sms.response.SchoolClassResponse;
-import com.example.sms.util.requestType.SchoolClassRequestType;
+import com.example.sms.util.RequestType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -50,11 +50,11 @@ public class FindAllSchoolClassService implements SchoolClassOperation{
      * Returns the type of school class request this service handles,
      * which is FIND_ALL.
      *
-     * @return SchoolClassRequestType.FIND_ALL
+     * @return RequestType.FIND_ALL
      */
     @Override
-    public SchoolClassRequestType getRequestType() {
-        return SchoolClassRequestType.FIND_ALL;
+    public RequestType getRequestType() {
+        return RequestType.FIND_ALL;
     }
     
     /**
@@ -73,7 +73,6 @@ public class FindAllSchoolClassService implements SchoolClassOperation{
         
         List<SchoolClass> list = schoolClassRepository.findAll();
         
-
         
         for (SchoolClass schoolClass : list){
             

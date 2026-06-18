@@ -1,12 +1,12 @@
 package com.example.sms.factories.studentFactory;
 
-import com.example.sms.entity.Student;
-import com.example.sms.exception.StudentFailedException;
+import com.example.sms.model.Student;
+import com.example.sms.exception.CreateFailedException;
 import com.example.sms.mapper.StudentMapper;
 import com.example.sms.repository.StudentRepository;
 import com.example.sms.request.StudentRequest;
 import com.example.sms.response.StudentResponse;
-import com.example.sms.util.requestType.StudentRequestType;
+import com.example.sms.util.RequestType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -22,8 +22,8 @@ public class CreateStudentService implements StudentOperations {
     
     
     @Override
-    public StudentRequestType getStudentRequestType() {
-        return StudentRequestType.CREATE;
+    public RequestType getStudentRequestType() {
+        return RequestType.CREATE;
     }
     
     @Override
@@ -36,7 +36,7 @@ public class CreateStudentService implements StudentOperations {
         try {
             studentRepository.save(entity);
         }catch (Exception e){
-            throw new StudentFailedException("Failed to create student: "
+            throw new CreateFailedException("Failed to create student: "
                     + e.getMessage());
         }
         return StudentResponse.builder()

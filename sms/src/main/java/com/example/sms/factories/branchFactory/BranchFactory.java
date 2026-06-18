@@ -1,6 +1,6 @@
 package com.example.sms.factories.branchFactory;
 
-import com.example.sms.util.requestType.BranchRequestType;
+import com.example.sms.util.RequestType;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 /**
  * Factory class responsible for managing and providing the appropriate
- * BranchOperation implementations based on the BranchRequestType.
+ * BranchOperation implementations based on the RequestType.
  * It initializes a mapping of request types to their corresponding
  * operations and allows retrieval of the correct operation for a given
  * request type.
@@ -23,8 +23,8 @@ public class BranchFactory {
     /** List of BranchOperation implementations that will be injected by Spring. */
     private final List<BranchOperation> branchOperations;
     
-    /** Map to hold the association between BranchRequestType and BranchOperation. */
-    private final Map<BranchRequestType,
+    /** Map to hold the association between RequestType and BranchOperation. */
+    private final Map<RequestType,
             BranchOperation> branchOperationMap = new HashMap<>();
     
     /**
@@ -43,7 +43,7 @@ public class BranchFactory {
     
     /**
      * Retrieves the BranchOperation implementation corresponding to the
-     * given BranchRequestType.
+     * given RequestType.
      *
      * @param requestType The type of branch request for which the operation
      * is needed.
@@ -51,7 +51,7 @@ public class BranchFactory {
      * or null if no operation is found for that type.
      */
     public BranchOperation getOperation(
-            final BranchRequestType requestType) {
+            final RequestType requestType) {
         
         return branchOperationMap.get(requestType);
     }

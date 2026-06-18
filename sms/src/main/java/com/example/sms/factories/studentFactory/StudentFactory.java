@@ -1,6 +1,6 @@
 package com.example.sms.factories.studentFactory;
 
-import com.example.sms.util.requestType.StudentRequestType;
+import com.example.sms.util.RequestType;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ public class StudentFactory {
     
     private final List<StudentOperations> studentOperationsList;
     
-    private final Map<StudentRequestType,
+    private final Map<RequestType,
             StudentOperations> studentOperationsMap = new HashMap<>();
     
     
@@ -27,7 +27,7 @@ public class StudentFactory {
     }
     
     public StudentOperations getOperation(
-            final StudentRequestType requestType){
+            final RequestType requestType){
         return studentOperationsMap.get(requestType);
     }
 }

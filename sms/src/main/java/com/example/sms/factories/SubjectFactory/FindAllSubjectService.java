@@ -1,14 +1,14 @@
 package com.example.sms.factories.SubjectFactory;
 
-import com.example.sms.entity.Branch;
-import com.example.sms.entity.Subject;
+import com.example.sms.model.Branch;
+import com.example.sms.model.Subject;
 import com.example.sms.mapper.BranchMapper;
 import com.example.sms.mapper.SubjectMapper;
 import com.example.sms.repository.SubjectRepository;
 import com.example.sms.request.SubjectRequest;
 import com.example.sms.response.BranchResponse;
 import com.example.sms.response.SubjectResponse;
-import com.example.sms.util.requestType.SubjectRequestType;
+import com.example.sms.util.RequestType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -41,8 +41,8 @@ public class FindAllSubjectService implements SubjectOperations{
      * this case. This method is used to identify the type of operation that this
      * service performs when processing a SubjectRequest. */
     @Override
-    public SubjectRequestType getRequestType() {
-        return SubjectRequestType.FIND_ALL;
+    public RequestType getRequestType() {
+        return RequestType.FIND_ALL;
     }
 
     /** Method to perform the operation of finding all subjects.

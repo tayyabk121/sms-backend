@@ -2,7 +2,7 @@ package com.example.sms.factories.branchFactory;
 
 import com.example.sms.request.BranchRequest;
 import com.example.sms.response.BranchResponse;
-import com.example.sms.util.requestType.BranchRequestType;
+import com.example.sms.util.RequestType;
 
 /**
  * Interface defining the contract for branch operations in the BranchFactory.
@@ -14,7 +14,7 @@ import com.example.sms.util.requestType.BranchRequestType;
 public interface BranchOperation {
    
     /** Returns the type of branch request that this operation handles. */
-    BranchRequestType getRequestType();
+    RequestType getRequestType();
     
     /** Performs the operation based on the provided BranchRequest and returns
      * a BranchResponse containing the result of the operation. */

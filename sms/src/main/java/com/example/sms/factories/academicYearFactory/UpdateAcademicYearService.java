@@ -1,14 +1,14 @@
 package com.example.sms.factories.academicYearFactory;
 
-import com.example.sms.entity.AcademicYear;
-import com.example.sms.entity.Branch;
+import com.example.sms.model.AcademicYear;
+import com.example.sms.model.Branch;
 import com.example.sms.mapper.AcademicYearMapper;
 import com.example.sms.repository.AcademicYearRepository;
 import com.example.sms.request.AcademicYearRequest;
 import com.example.sms.response.AcademicYearResponse;
-import com.example.sms.util.requestType.AcademicYearRequestType;
-import com.example.sms.validation.AcademicYearValidation;
-import com.example.sms.validation.BranchValidation;
+import com.example.sms.util.RequestType;
+import com.example.sms.helper.AcademicYearHelper;
+import com.example.sms.helper.BranchHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -28,14 +28,14 @@ public class UpdateAcademicYearService implements AcademicYearOperations{
    
     /** Validation service for verifying the existence and validity of
      *  AcademicYear entities. */
-    private final AcademicYearValidation academicYearValidation;
+    private final AcademicYearHelper academicYearHelperImpl;
     
     /** Mapper for converting between AcademicYearRequest and AcademicYear entities. */
     private final AcademicYearMapper academicYearMapper;
     
     /** Validation service for verifying the existence and validity of
      *  Branch entities. */
-    private final BranchValidation branchValidation;
+    private final BranchHelper branchHelper;
     
     /** Repository for performing CRUD operations on AcademicYear entities. */
     private final AcademicYearRepository academicYearRepository;
@@ -44,11 +44,11 @@ public class UpdateAcademicYearService implements AcademicYearOperations{
      * Returns the type of academic year request this service handles,
      * which is UPDATE.
      *
-     * @return AcademicYearRequestType.UPDATE
+     * @return RequestType.UPDATE
      */
     @Override
-    public AcademicYearRequestType getRequestType() {
-        return AcademicYearRequestType.UPDATE;
+    public RequestType getRequestType() {
+        return RequestType.UPDATE;
     }
     
     /**
@@ -69,12 +69,12 @@ public class UpdateAcademicYearService implements AcademicYearOperations{
         log.info("Starting update process for Academic Year with ID: {}",
                 academicYearId);
         
-        AcademicYear academicYear = academicYearValidation.findById(
+        AcademicYear academicYear = academicYearHelperImpl.findById(
                 academicYearId);
         
         log.info("Academic Year found: {}", academicYear.getId());
         
-        Branch branch = branchValidation.findById(request.getBranchId());
+        Branch branch = branchHelper.findById(request.getBranchId());
         
         AcademicYear update = academicYearMapper.toUpdate(
                 request, academicYear, branch);

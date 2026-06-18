@@ -10,11 +10,15 @@ import com.example.sms.factories.schoolClassFactory.SchoolClassFactory;
 import com.example.sms.factories.schoolClassFactory.SchoolClassOperation;
 import com.example.sms.factories.schoolGroupFactory.SchoolGroupFactory;
 import com.example.sms.factories.schoolGroupFactory.SchoolGroupOperations;
+import com.example.sms.factories.staffFactory.StaffFactory;
+import com.example.sms.factories.staffFactory.StaffOperations;
 import com.example.sms.factories.studentFactory.StudentFactory;
 import com.example.sms.factories.studentFactory.StudentOperations;
+import com.example.sms.factories.userFactory.UserFactory;
+import com.example.sms.factories.userFactory.UserOperations;
 import com.example.sms.request.*;
 import com.example.sms.response.*;
-import com.example.sms.util.requestType.*;
+import com.example.sms.util.RequestType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
@@ -57,6 +61,12 @@ public class SchoolController {
     /** Factory for handling subject-related operations based on request types. */
     private final SubjectFactory subjectFactory;
     
+    /** Factory for handling user-related operations based on request types. */
+    private final UserFactory userFactory;
+    
+    /** Factory for handling staff-related operations based on request types. */
+    private final StaffFactory staffFactory;
+    
     /** Endpoint for handling school group-related requests. It determines the
      * request type and delegates the operation to the appropriate service from
      * the school group factory. */
@@ -64,14 +74,14 @@ public class SchoolController {
     public SchoolGroupResponse handleSchoolGroup(
             @RequestBody SchoolGroupRequest request){
         
-        SchoolGroupRequestType schoolGroupRequestType =
+        RequestType requestType =
                 request.getRequestType();
         
         log.info("Received school group request Type : {}",
-                schoolGroupRequestType);
+                requestType);
         
         SchoolGroupOperations operation = schoolGroupFactory
-                .getOperation(schoolGroupRequestType);
+                .getOperation(requestType);
         
         return operation.performOperation(request);
     }
@@ -83,14 +93,14 @@ public class SchoolController {
     public BranchResponse handleBranch(
             @RequestBody BranchRequest request){
         
-        BranchRequestType branchRequestType =
+        RequestType requestType =
                 request.getRequestType();
         
         log.info("Received branch request Type : {}",
-                branchRequestType);
+                requestType);
         
         BranchOperation operation = branchFactory.getOperation(
-                branchRequestType);
+                requestType);
         
                 return operation.performOperation(request);
     }
@@ -102,14 +112,14 @@ public class SchoolController {
     public AcademicYearResponse handleAcademicYear(
             @RequestBody AcademicYearRequest request){
         
-        AcademicYearRequestType academicYearRequestType =
+        RequestType requestType =
                 request.getRequestType();
         
         log.info("Received academic year request Type : {}",
-                academicYearRequestType);
+                requestType);
         
         AcademicYearOperations operation = academicYearFactory
-                .getOperation(academicYearRequestType);
+                .getOperation(requestType);
         
         return operation.performOperation(request);
     }
@@ -121,14 +131,14 @@ public class SchoolController {
     public SchoolClassResponse handleSchoolClass(
             @RequestBody SchoolClassRequest request){
         
-        SchoolClassRequestType schoolClassRequestType =
+        RequestType requestType =
                 request.getRequestType();
         
         log.info("Received school class request Type : {}",
-                schoolClassRequestType);
+                requestType);
         
         SchoolClassOperation operation = schoolClassFactory
-                .getOperation(schoolClassRequestType);
+                .getOperation(requestType);
         
         return operation.performOperation(request);
     }
@@ -140,14 +150,14 @@ public class SchoolController {
     public StudentResponse handleStudent(
             @RequestBody StudentRequest request){
         
-        StudentRequestType studentRequestType = request
+        RequestType requestType = request
                 .getRequestType();
         
         log.info("Received student request Type : {}",
-                studentRequestType);
+                requestType);
         
         StudentOperations operation = studentFactory.getOperation(
-                studentRequestType);
+                requestType);
         
         return operation.performOperation(request);
     }
@@ -159,7 +169,7 @@ public class SchoolController {
     public SubjectResponse handleSubject(
             @RequestBody SubjectRequest request){
         
-        SubjectRequestType requestType = request.getRequestType();
+        RequestType requestType = request.getRequestType();
         
         log.info("Received subject request Type : {}",
                 requestType);
@@ -168,6 +178,37 @@ public class SchoolController {
                 .getOperation(requestType);
         
         return operation.performOperation(request);
+    }
+    
+    @PostMapping("/user")
+    public UserResponse handleUser(
+            @RequestBody UserRequest request){
+        
+        RequestType requestType = request.getRequestType();
+        
+        log.info("Received user request Type : {}",
+                requestType);
+        
+        UserOperations operation = userFactory.getOperation(requestType);
+        
+        return operation.performOperation(request);
+    }
+    
+    /** Endpoint for handling staff-related requests. It determines the request
+     * type and delegates the operation to the appropriate service from the
+     * staff factory. */
+    @PostMapping("/staff")
+    public StaffResponse handleStaff(
+            @RequestBody StaffRequest request){
+        
+        RequestType requestType = request.getRequestType();
+        
+        log.info("Received staff request Type : {}",
+                requestType);
+        
+        StaffOperations operation = staffFactory.getOperation(requestType);
+        
+        return operation.execute(request);
     }
     
 }

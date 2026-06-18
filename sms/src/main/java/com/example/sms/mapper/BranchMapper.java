@@ -1,7 +1,7 @@
 package com.example.sms.mapper;
 
-import com.example.sms.entity.Branch;
-import com.example.sms.entity.SchoolGroup;
+import com.example.sms.model.Branch;
+import com.example.sms.model.SchoolGroup;
 import com.example.sms.request.BranchRequest;
 import com.example.sms.response.AcademicYearResponse;
 import com.example.sms.response.BranchResponse;

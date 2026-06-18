@@ -2,7 +2,7 @@ package com.example.sms.factories.SubjectFactory;
 
 import com.example.sms.request.SubjectRequest;
 import com.example.sms.response.SubjectResponse;
-import com.example.sms.util.requestType.SubjectRequestType;
+import com.example.sms.util.RequestType;
 
 /** Interface defining operations for handling subject-related requests.
  * Each implementation will correspond to a specific type of
@@ -12,8 +12,8 @@ public interface SubjectOperations {
     /** Returns the type of subject request that this operation
      * implementation handles.
      *
-     * @return The SubjectRequestType associated with this operation. */
-    SubjectRequestType getRequestType();
+     * @return The RequestType associated with this operation. */
+    RequestType getRequestType();
     
     /** Performs the specific operation defined by the implementation
      * based on the provided SubjectRequest.

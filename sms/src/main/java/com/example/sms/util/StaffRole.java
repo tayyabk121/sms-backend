@@ -4,10 +4,11 @@ package com.example.sms.util;
  * school management system. This enum is used to define the various
  * responsibilities and permissions associated with each role. */
 public enum StaffRole {
+    NO_STAFF,
     TEACHER,
     PRINCIPAL,
     ACCOUNTANT,
     LIBRARIAN,
-    ADMIN,
-    SUPPORT
+    SUPPORT,
+    RECEPTIONIST
 }

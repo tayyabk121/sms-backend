@@ -1,6 +1,6 @@
 package com.example.sms.request;
 
-import com.example.sms.util.requestType.SchoolClassRequestType;
+import com.example.sms.util.RequestType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +10,7 @@ import lombok.Setter;
  * This class contains the necessary information for performing operations
  * related to school classes, such as the class name, grade level, section,
  * and associated branch and academic year. The type of request (create,
- * update, delete) is determined by the schoolClassRequestType field.
+ * update, delete) is determined by the RequestType field.
  */
 @Getter
 @Setter
@@ -23,5 +23,5 @@ public class SchoolClassRequest {
     private String name;
     private Integer gradeLevel;
     private String section;
-    private SchoolClassRequestType requestType;
+    private RequestType requestType;
 }

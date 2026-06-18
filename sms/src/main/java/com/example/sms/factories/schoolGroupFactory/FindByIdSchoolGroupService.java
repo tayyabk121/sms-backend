@@ -1,11 +1,11 @@
 package com.example.sms.factories.schoolGroupFactory;
 
-import com.example.sms.entity.SchoolGroup;
+import com.example.sms.model.SchoolGroup;
 import com.example.sms.mapper.SchoolGroupMapper;
 import com.example.sms.request.SchoolGroupRequest;
 import com.example.sms.response.SchoolGroupResponse;
-import com.example.sms.util.requestType.SchoolGroupRequestType;
-import com.example.sms.validation.SchoolGroupValidation;
+import com.example.sms.util.RequestType;
+import com.example.sms.helper.SchoolGroupHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 public class FindByIdSchoolGroupService implements SchoolGroupOperations {
 
     /** Validation component for ensuring the integrity of school group data. */
-    private final SchoolGroupValidation schoolGroupValidation;
+    private final SchoolGroupHelper schoolGroupValidation;
     
     /** Mapper for converting between SchoolGroupRequest and
      * SchoolGroup entities. */
@@ -32,11 +32,11 @@ public class FindByIdSchoolGroupService implements SchoolGroupOperations {
      * Returns the type of school group request this service handles,
      * which is FIND_BY_ID.
      *
-     * @return SchoolGroupRequestType.FIND_BY_ID
+     * @return RequestType.FIND_BY_ID
      */
     @Override
-    public SchoolGroupRequestType getSchoolGroupRequestType() {
-        return SchoolGroupRequestType.FIND_BY_ID;
+    public RequestType getSchoolGroupRequestType() {
+        return RequestType.FIND_BY_ID;
     }
 
     /**

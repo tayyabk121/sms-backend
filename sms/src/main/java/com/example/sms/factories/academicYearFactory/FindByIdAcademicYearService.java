@@ -1,14 +1,13 @@
 package com.example.sms.factories.academicYearFactory;
 
-import com.example.sms.entity.AcademicYear;
+import com.example.sms.model.AcademicYear;
 import com.example.sms.mapper.AcademicYearMapper;
 import com.example.sms.mapper.BranchMapper;
 import com.example.sms.request.AcademicYearRequest;
 import com.example.sms.response.AcademicYearResponse;
 import com.example.sms.response.BranchResponse;
-import com.example.sms.util.requestType.AcademicYearRequestType;
-import com.example.sms.validation.AcademicYearValidation;
-import com.example.sms.validation.BranchValidation;
+import com.example.sms.util.RequestType;
+import com.example.sms.helper.AcademicYearHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -27,7 +26,7 @@ public class FindByIdAcademicYearService implements AcademicYearOperations{
    
     /** Validation service for verifying the existence and validity of
      *  AcademicYear entities. */
-    private final AcademicYearValidation academicYearValidation;
+    private final AcademicYearHelper academicYearHelperImpl;
     
     /** Mapper for converting between AcademicYear entities and
      * AcademicYearResponse objects. */
@@ -41,11 +40,11 @@ public class FindByIdAcademicYearService implements AcademicYearOperations{
      * Returns the type of academic year request this service handles,
      * which is FIND_BY_ID.
      *
-     * @return AcademicYearRequestType.FIND_BY_ID
+     * @return RequestType.FIND_BY_ID
      */
     @Override
-    public AcademicYearRequestType getRequestType() {
-        return AcademicYearRequestType.FIND_BY_ID;
+    public RequestType getRequestType() {
+        return RequestType.FIND_BY_ID;
     }
     
     /**
@@ -67,7 +66,7 @@ public class FindByIdAcademicYearService implements AcademicYearOperations{
         log.info("Starting find by ID process for Academic Year with ID: {}",
                 academicYearId);
         
-        AcademicYear academicYear = academicYearValidation.findById(
+        AcademicYear academicYear = academicYearHelperImpl.findById(
                 academicYearId);
         
         log.info("Academic Year found: {}", academicYear);

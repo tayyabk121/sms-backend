@@ -1,7 +1,7 @@
 package com.example.sms.factories.branchFactory;
 
-import com.example.sms.entity.AcademicYear;
-import com.example.sms.entity.Branch;
+import com.example.sms.model.AcademicYear;
+import com.example.sms.model.Branch;
 import com.example.sms.mapper.AcademicYearMapper;
 import com.example.sms.mapper.BranchMapper;
 import com.example.sms.mapper.SchoolGroupMapper;
@@ -10,7 +10,7 @@ import com.example.sms.request.BranchRequest;
 import com.example.sms.response.AcademicYearResponse;
 import com.example.sms.response.BranchResponse;
 import com.example.sms.response.SchoolGroupResponse;
-import com.example.sms.util.requestType.BranchRequestType;
+import com.example.sms.util.RequestType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -48,11 +48,11 @@ public class FindAllBranchService implements BranchOperation{
      * Returns the type of branch request this service handles,
      * which is FIND_ALL.
      *
-     * @return BranchRequestType.FIND_ALL
+     * @return RequestType.FIND_ALL
      */
     @Override
-    public BranchRequestType getRequestType() {
-        return BranchRequestType.FIND_ALL;
+    public RequestType getRequestType() {
+        return RequestType.FIND_ALL;
     }
 
     /**

@@ -1,14 +1,13 @@
 package com.example.sms.factories.academicYearFactory;
 
-import com.example.sms.entity.AcademicYear;
-import com.example.sms.entity.Branch;
+import com.example.sms.model.AcademicYear;
 import com.example.sms.mapper.AcademicYearMapper;
 import com.example.sms.mapper.BranchMapper;
 import com.example.sms.repository.AcademicYearRepository;
 import com.example.sms.request.AcademicYearRequest;
 import com.example.sms.response.AcademicYearResponse;
 import com.example.sms.response.BranchResponse;
-import com.example.sms.util.requestType.AcademicYearRequestType;
+import com.example.sms.util.RequestType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -43,11 +42,11 @@ public class FindAllAcademicYearService implements AcademicYearOperations{
      * Returns the type of academic year request this service handles,
      * which is FIND_ALL.
      *
-     * @return AcademicYearRequestType.FIND_ALL
+     * @return RequestType.FIND_ALL
      */
     @Override
-    public AcademicYearRequestType getRequestType() {
-        return AcademicYearRequestType.FIND_ALL;
+    public RequestType getRequestType() {
+        return RequestType.FIND_ALL;
     }
     
     /**

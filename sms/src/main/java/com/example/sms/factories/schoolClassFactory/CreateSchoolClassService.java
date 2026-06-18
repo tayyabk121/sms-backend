@@ -1,15 +1,15 @@
 package com.example.sms.factories.schoolClassFactory;
 
-import com.example.sms.entity.AcademicYear;
-import com.example.sms.entity.Branch;
-import com.example.sms.entity.SchoolClass;
+import com.example.sms.model.AcademicYear;
+import com.example.sms.model.Branch;
+import com.example.sms.model.SchoolClass;
 import com.example.sms.mapper.SchoolClassMapper;
 import com.example.sms.repository.SchoolClassRepository;
 import com.example.sms.request.SchoolClassRequest;
 import com.example.sms.response.SchoolClassResponse;
-import com.example.sms.util.requestType.SchoolClassRequestType;
-import com.example.sms.validation.AcademicYearValidation;
-import com.example.sms.validation.BranchValidation;
+import com.example.sms.util.RequestType;
+import com.example.sms.helper.AcademicYearHelper;
+import com.example.sms.helper.BranchHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -33,21 +33,21 @@ public class CreateSchoolClassService implements SchoolClassOperation{
     
     /** Validation service for verifying the existence and validity
      *  of Branch entities. */
-    private final BranchValidation branchValidation;
+    private final BranchHelper branchHelper;
     
     /** Validation service for verifying the existence and validity
      *  of AcademicYear entities. */
-    private final AcademicYearValidation academicYearValidation;
+    private final AcademicYearHelper academicYearHelperImpl;
     
     /**
      * Returns the type of school class request this service handles,
      * which is CREATE.
      *
-     * @return SchoolClassRequestType.CREATE
+     * @return RequestType.CREATE
      */
     @Override
-    public SchoolClassRequestType getRequestType() {
-        return SchoolClassRequestType.CREATE;
+    public RequestType getRequestType() {
+        return RequestType.CREATE;
     }
     
     /**
@@ -66,9 +66,9 @@ public class CreateSchoolClassService implements SchoolClassOperation{
         log.info("Creating school class with name: {}",
                 request.getName());
         
-        Branch branch = branchValidation.findById(request.getBranchId());
+        Branch branch = branchHelper.findById(request.getBranchId());
         
-        AcademicYear academicYear = academicYearValidation.findById(
+        AcademicYear academicYear = academicYearHelperImpl.findById(
                 request.getAcademicYearId());
         
         SchoolClass entity = schoolClassMapper.toEntity(

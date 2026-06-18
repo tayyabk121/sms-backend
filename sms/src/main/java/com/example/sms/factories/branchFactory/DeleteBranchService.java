@@ -1,10 +1,10 @@
 package com.example.sms.factories.branchFactory;
 
-import com.example.sms.entity.Branch;
+import com.example.sms.model.Branch;
 import com.example.sms.request.BranchRequest;
 import com.example.sms.response.BranchResponse;
-import com.example.sms.util.requestType.BranchRequestType;
-import com.example.sms.validation.BranchValidation;
+import com.example.sms.util.RequestType;
+import com.example.sms.helper.BranchHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -21,17 +21,17 @@ public class DeleteBranchService implements BranchOperation{
    
     /** Validation service for verifying the existence and validity of
      *  Branch entities. */
-    private final BranchValidation branchValidation;
+    private final BranchHelper branchHelper;
     
     /**
      * Returns the type of branch request this service handles,
      * which is DELETE.
      *
-     * @return BranchRequestType.DELETE
+     * @return RequestType.DELETE
      */
     @Override
-    public BranchRequestType getRequestType() {
-        return BranchRequestType.DELETE;
+    public RequestType getRequestType() {
+        return RequestType.DELETE;
     }
     
     /**
@@ -52,9 +52,9 @@ public class DeleteBranchService implements BranchOperation{
         log.info("Starting delete process for Branch with ID: {}",
                 branchId);
         
-        Branch branch = branchValidation.findById(branchId);
+        Branch branch = branchHelper.findById(branchId);
         
-        branchValidation.delete(branch);
+        branchHelper.delete(branch);
         
         return BranchResponse.builder()
                 .message("Branch deleted successfully")

@@ -1,10 +1,10 @@
 package com.example.sms.factories.academicYearFactory;
 
-import com.example.sms.entity.AcademicYear;
+import com.example.sms.model.AcademicYear;
 import com.example.sms.request.AcademicYearRequest;
 import com.example.sms.response.AcademicYearResponse;
-import com.example.sms.util.requestType.AcademicYearRequestType;
-import com.example.sms.validation.AcademicYearValidation;
+import com.example.sms.util.RequestType;
+import com.example.sms.helper.AcademicYearHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -23,17 +23,17 @@ public class DeleteAcademicYearService implements  AcademicYearOperations{
    
     /** Validation service for verifying the existence and validity of
      *  AcademicYear entities. */
-    private final AcademicYearValidation academicYearValidation;
+    private final AcademicYearHelper academicYearHelperImpl;
     
         /**
         * Returns the type of academic year request this service handles,
         * which is DELETE.
         *
-        * @return AcademicYearRequestType.DELETE
+        * @return RequestType.DELETE
         */
     @Override
-    public AcademicYearRequestType getRequestType() {
-        return AcademicYearRequestType.DELETE;
+    public RequestType getRequestType() {
+        return RequestType.DELETE;
     }
     
     /**
@@ -54,12 +54,12 @@ public class DeleteAcademicYearService implements  AcademicYearOperations{
         log.info("Attempting to delete Academic Year with ID: {}",
                 academicYearId);
         
-        AcademicYear academicYear = academicYearValidation.findById(
+        AcademicYear academicYear = academicYearHelperImpl.findById(
                 academicYearId);
         
         log.info("Academic Year found: {}", academicYear.getId());
         
-        academicYearValidation.delete(academicYear);
+        academicYearHelperImpl.delete(academicYear);
         
         return AcademicYearResponse.builder()
                 .message("Academic Year deleted successfully")

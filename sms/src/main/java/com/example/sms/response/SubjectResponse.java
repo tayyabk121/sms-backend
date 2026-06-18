@@ -1,6 +1,5 @@
 package com.example.sms.response;
 
-import com.example.sms.entity.Branch;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Getter;

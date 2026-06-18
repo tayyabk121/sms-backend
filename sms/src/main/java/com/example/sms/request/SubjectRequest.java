@@ -1,6 +1,6 @@
 package com.example.sms.request;
 
-import com.example.sms.util.requestType.SubjectRequestType;
+import com.example.sms.util.RequestType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,5 +15,5 @@ public class SubjectRequest {
     private String id;
     private String branchId;
     private String name;
-    private SubjectRequestType requestType;
+    private RequestType requestType;
 }

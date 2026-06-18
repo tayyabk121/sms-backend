@@ -2,7 +2,7 @@ package com.example.sms.factories.academicYearFactory;
 
 import com.example.sms.request.AcademicYearRequest;
 import com.example.sms.response.AcademicYearResponse;
-import com.example.sms.util.requestType.AcademicYearRequestType;
+import com.example.sms.util.RequestType;
 
 /**
  * Interface defining the contract for operations related to academic years.
@@ -17,7 +17,7 @@ public interface AcademicYearOperations {
      *  implementation handles. It returns an AcademicYearRequestType enum
      *  value indicating the specific type of request (e.g., CREATE, UPDATE,
      *  DELETE). */
-    AcademicYearRequestType getRequestType();
+    RequestType getRequestType();
     
     /** Method to perform the operation based on the provided AcademicYearRequest.
      *  It takes an AcademicYearRequest as input, processes it according to the

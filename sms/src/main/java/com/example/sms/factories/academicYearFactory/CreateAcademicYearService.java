@@ -1,14 +1,13 @@
 package com.example.sms.factories.academicYearFactory;
 
-import com.example.sms.entity.AcademicYear;
-import com.example.sms.entity.Branch;
-import com.example.sms.exception.BranchIdNotFoundException;
+import com.example.sms.model.AcademicYear;
+import com.example.sms.model.Branch;
 import com.example.sms.mapper.AcademicYearMapper;
 import com.example.sms.repository.AcademicYearRepository;
 import com.example.sms.request.AcademicYearRequest;
 import com.example.sms.response.AcademicYearResponse;
-import com.example.sms.util.requestType.AcademicYearRequestType;
-import com.example.sms.validation.BranchValidation;
+import com.example.sms.util.RequestType;
+import com.example.sms.helper.BranchHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -34,17 +33,17 @@ public class CreateAcademicYearService implements AcademicYearOperations {
     
     /** Validation service for verifying the existence and validity
      *  of Branch entities. */
-    private final BranchValidation branchValidation;
+    private final BranchHelper branchHelper;
 
     /**
      * Returns the type of academic year request this service handles,
      * which is CREATE.
      *
-     * @return AcademicYearRequestType.CREATE
+     * @return RequestType.CREATE
      */
     @Override
-    public AcademicYearRequestType getRequestType() {
-        return AcademicYearRequestType.CREATE;
+    public RequestType getRequestType() {
+        return RequestType.CREATE;
     }
 
     /**
@@ -62,7 +61,7 @@ public class CreateAcademicYearService implements AcademicYearOperations {
             log.info("Performing academic year operation for request: {}",
                     request);
         
-        Branch branch = branchValidation.findById(request.getBranchId());
+        Branch branch = branchHelper.findById(request.getBranchId());
             
             AcademicYear entity = academicYearMapper.toEntity(
                     request, branch);

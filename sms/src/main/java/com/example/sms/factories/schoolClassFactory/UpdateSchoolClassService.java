@@ -1,17 +1,17 @@
 package com.example.sms.factories.schoolClassFactory;
 
-import com.example.sms.entity.AcademicYear;
-import com.example.sms.entity.Branch;
-import com.example.sms.entity.SchoolClass;
-import com.example.sms.exception.AcademicYearIdNotFoundException;
+import com.example.sms.model.AcademicYear;
+import com.example.sms.model.Branch;
+import com.example.sms.model.SchoolClass;
+import com.example.sms.exception.IdNotFoundException;
 import com.example.sms.mapper.SchoolClassMapper;
 import com.example.sms.repository.SchoolClassRepository;
 import com.example.sms.request.SchoolClassRequest;
 import com.example.sms.response.SchoolClassResponse;
-import com.example.sms.util.requestType.SchoolClassRequestType;
-import com.example.sms.validation.AcademicYearValidation;
-import com.example.sms.validation.BranchValidation;
-import com.example.sms.validation.SchoolClassValidation;
+import com.example.sms.util.RequestType;
+import com.example.sms.helper.AcademicYearHelper;
+import com.example.sms.helper.BranchHelper;
+import com.example.sms.helper.SchoolClassHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,7 @@ public class UpdateSchoolClassService implements SchoolClassOperation{
     
     /** Validation service for verifying the existence and validity
      *  of SchoolClass entities. */
-    private final SchoolClassValidation schoolClassValidation;
+    private final SchoolClassHelper schoolClassValidation;
     
     /** Mapper for converting between SchoolClassRequest and
      * SchoolClass entities. */
@@ -42,11 +42,11 @@ public class UpdateSchoolClassService implements SchoolClassOperation{
     
     /** Validation service for verifying the existence and validity
      *  of Branch entities. */
-    private final BranchValidation branchValidation;
+    private final BranchHelper branchHelper;
     
     /** Validation service for verifying the existence and validity
      *  of AcademicYear entities. */
-    private final AcademicYearValidation academicYearValidation;
+    private final AcademicYearHelper academicYearHelperImpl;
     
     /** List to hold AcademicYear entities associated with the branch. */
     private final List<AcademicYear> academicYearList = new ArrayList<>();
@@ -55,11 +55,11 @@ public class UpdateSchoolClassService implements SchoolClassOperation{
      * Returns the type of school class request this service handles,
      * which is UPDATE.
      *
-     * @return SchoolClassRequestType.UPDATE
+     * @return RequestType.UPDATE
      */
     @Override
-    public SchoolClassRequestType getRequestType() {
-        return SchoolClassRequestType.UPDATE;
+    public RequestType getRequestType() {
+        return RequestType.UPDATE;
     }
     
     /**
@@ -72,7 +72,7 @@ public class UpdateSchoolClassService implements SchoolClassOperation{
      * @param request The SchoolClassRequest containing the details of the
      * school class to be updated.
      * @return A SchoolClassResponse indicating the success of the operation.
-     * @throws AcademicYearIdNotFoundException if the academic year ID is not found
+     * @throws IdNotFoundException if the academic year ID is not found
      * in the branch or if it is not valid.
      */
     @Override
@@ -90,7 +90,7 @@ public class UpdateSchoolClassService implements SchoolClassOperation{
         
         String branchId = request.getBranchId();
         
-        Branch branch = branchValidation.findById(
+        Branch branch = branchHelper.findById(
                 branchId);
         
         
@@ -104,13 +104,13 @@ public class UpdateSchoolClassService implements SchoolClassOperation{
             if(academicYearIdFromBranch != null &&
                     !academicYearIdFromBranch.isEmpty()){
                 
-                 AcademicYear academicYear1 = academicYearValidation.findById(
+                 AcademicYear academicYear1 = academicYearHelperImpl.findById(
                         academicYearIdFromBranch);
                  
                  academicYearList.add(academicYear1);
                  
             }else {
-                throw new AcademicYearIdNotFoundException(
+                throw new IdNotFoundException(
                         "Academic year ID not found in branch with id: "
                                 + branchId);
             }
@@ -122,7 +122,7 @@ public class UpdateSchoolClassService implements SchoolClassOperation{
                 .filter(x -> x.getId().equals(
                         request.getAcademicYearId()))
                 .findFirst()
-                .orElseThrow(() -> new AcademicYearIdNotFoundException(
+                .orElseThrow(() -> new IdNotFoundException(
                         "Academic year ID: " + request.getAcademicYearId()
                                 + " not found in branch with id: " + branchId));
         

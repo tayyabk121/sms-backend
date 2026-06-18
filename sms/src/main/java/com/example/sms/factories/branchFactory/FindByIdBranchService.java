@@ -1,7 +1,7 @@
 package com.example.sms.factories.branchFactory;
 
-import com.example.sms.entity.AcademicYear;
-import com.example.sms.entity.Branch;
+import com.example.sms.model.AcademicYear;
+import com.example.sms.model.Branch;
 import com.example.sms.mapper.AcademicYearMapper;
 import com.example.sms.mapper.BranchMapper;
 import com.example.sms.mapper.SchoolGroupMapper;
@@ -9,8 +9,8 @@ import com.example.sms.request.BranchRequest;
 import com.example.sms.response.AcademicYearResponse;
 import com.example.sms.response.BranchResponse;
 import com.example.sms.response.SchoolGroupResponse;
-import com.example.sms.util.requestType.BranchRequestType;
-import com.example.sms.validation.BranchValidation;
+import com.example.sms.util.RequestType;
+import com.example.sms.helper.BranchHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ public class FindByIdBranchService implements BranchOperation{
    
     /** Validation service for verifying the existence and validity of
      *  Branch entities. */
-    private final BranchValidation branchValidation;
+    private final BranchHelper branchHelper;
     
     /** Mapper for converting between Branch entities and BranchResponse objects. */
     private final BranchMapper branchMapper;
@@ -50,11 +50,11 @@ public class FindByIdBranchService implements BranchOperation{
         * Returns the type of branch request this service handles,
         * which is FIND_BY_ID.
         *
-        * @return BranchRequestType.FIND_BY_ID
+        * @return RequestType.FIND_BY_ID
         */
     @Override
-    public BranchRequestType getRequestType() {
-        return BranchRequestType.FIND_BY_ID;
+    public RequestType getRequestType() {
+        return RequestType.FIND_BY_ID;
     }
     
     /**
@@ -75,7 +75,7 @@ public class FindByIdBranchService implements BranchOperation{
         log.info("Starting find by ID process for Branch with ID: {}",
                 branchId);
         
-        Branch branch = branchValidation.findById(
+        Branch branch = branchHelper.findById(
                 branchId);
         
         log.info("Branch found: {}", branch.getId());

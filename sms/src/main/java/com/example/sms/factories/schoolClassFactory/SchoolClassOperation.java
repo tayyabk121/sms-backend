@@ -2,7 +2,7 @@ package com.example.sms.factories.schoolClassFactory;
 
 import com.example.sms.request.SchoolClassRequest;
 import com.example.sms.response.SchoolClassResponse;
-import com.example.sms.util.requestType.SchoolClassRequestType;
+import com.example.sms.util.RequestType;
 
 /**
  * Interface for school class operations.
@@ -10,7 +10,7 @@ import com.example.sms.util.requestType.SchoolClassRequestType;
 public interface SchoolClassOperation {
     
     /** Returns the type of school class request this operation handles. */
-    SchoolClassRequestType getRequestType();
+    RequestType getRequestType();
     
     /** Performs the operation based on the provided school class
      * request and returns a response. */

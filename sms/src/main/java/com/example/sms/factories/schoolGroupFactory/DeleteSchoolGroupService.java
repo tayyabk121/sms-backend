@@ -1,11 +1,10 @@
 package com.example.sms.factories.schoolGroupFactory;
 
-import com.example.sms.entity.SchoolGroup;
-import com.example.sms.repository.SchoolGroupRepository;
+import com.example.sms.model.SchoolGroup;
 import com.example.sms.request.SchoolGroupRequest;
 import com.example.sms.response.SchoolGroupResponse;
-import com.example.sms.util.requestType.SchoolGroupRequestType;
-import com.example.sms.validation.SchoolGroupValidation;
+import com.example.sms.util.RequestType;
+import com.example.sms.helper.SchoolGroupHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -22,12 +21,12 @@ public class DeleteSchoolGroupService implements SchoolGroupOperations{
 
     /** Validation component for performing checks and operations
      * related to SchoolGroup entities. */
-    private final SchoolGroupValidation schoolGroupValidation;
+    private final SchoolGroupHelper schoolGroupValidation;
 
-    /** SchoolGroupRequestType that this service handles, which is DELETE. */
+    /** RequestType that this service handles, which is DELETE. */
     @Override
-    public SchoolGroupRequestType getSchoolGroupRequestType() {
-        return SchoolGroupRequestType.DELETE;
+    public RequestType getSchoolGroupRequestType() {
+        return RequestType.DELETE;
     }
 
     /**

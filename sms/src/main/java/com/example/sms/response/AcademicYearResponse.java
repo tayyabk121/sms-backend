@@ -1,6 +1,5 @@
 package com.example.sms.response;
 
-import com.example.sms.util.requestType.AcademicYearRequestType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Getter;
@@ -36,7 +35,5 @@ public class AcademicYearResponse {
     private String message;
     
     private List<AcademicYearResponse> academicYearResponseList;
-    
-    private AcademicYearRequestType academicYearRequestType;
     
 }

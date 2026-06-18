@@ -1,8 +1,8 @@
 package com.example.sms.request;
 
-import com.example.sms.entity.SchoolClass;
+import com.example.sms.model.SchoolClass;
 import com.example.sms.util.Gender;
-import com.example.sms.util.requestType.StudentRequestType;
+import com.example.sms.util.RequestType;
 import com.example.sms.util.StudentStatus;
 import com.example.sms.util.Transport;
 import lombok.Builder;
@@ -15,7 +15,7 @@ import java.time.LocalDate;
  * Represents a request to create or update a student in the system.
  * This class contains all the necessary information about the student,
  * including their personal details, class information, and status.
- * The studentRequestType field indicates whether the request is for creating
+ * The RequestType field indicates whether the request is for creating
  * a new student or updating an existing one.
  */
 @Getter
@@ -43,5 +43,5 @@ public class StudentRequest {
     
     private LocalDate admittedOn;
     
-    private StudentRequestType requestType;
+    private RequestType requestType;
 }

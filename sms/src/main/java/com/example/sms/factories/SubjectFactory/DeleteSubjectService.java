@@ -1,10 +1,10 @@
 package com.example.sms.factories.SubjectFactory;
 
-import com.example.sms.entity.Subject;
+import com.example.sms.model.Subject;
 import com.example.sms.request.SubjectRequest;
 import com.example.sms.response.SubjectResponse;
-import com.example.sms.util.requestType.SubjectRequestType;
-import com.example.sms.validation.SubjectValidation;
+import com.example.sms.util.RequestType;
+import com.example.sms.helper.SubjectHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -24,14 +24,14 @@ public class DeleteSubjectService implements SubjectOperations{
      * finding a Subject by ID and deleting a Subject. This component is
      * injected into the service to perform necessary validation and operations
      * on the Subject entity during the delete operation. */
-    private final SubjectValidation subjectValidation;
+    private final SubjectHelper subjectValidation;
     
     /** Returns the type of subject request that this operation implementation
      * handles, which is DELETE in this case. This method is used to identify
      * the specific operation type when processing subject-related requests. */
     @Override
-    public SubjectRequestType getRequestType() {
-        return SubjectRequestType.DELETE;
+    public RequestType getRequestType() {
+        return RequestType.DELETE;
     }
     
     /** Performs the delete operation for a Subject based on the provided

@@ -1,10 +1,10 @@
 package com.example.sms.factories.schoolClassFactory;
 
-import com.example.sms.entity.SchoolClass;
+import com.example.sms.model.SchoolClass;
 import com.example.sms.request.SchoolClassRequest;
 import com.example.sms.response.SchoolClassResponse;
-import com.example.sms.util.requestType.SchoolClassRequestType;
-import com.example.sms.validation.SchoolClassValidation;
+import com.example.sms.util.RequestType;
+import com.example.sms.helper.SchoolClassHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -21,17 +21,17 @@ public class DeleteSchoolClassService implements SchoolClassOperation{
     
     /** Validation service for verifying the existence and validity of
      *  SchoolClass entities. */
-    private final SchoolClassValidation schoolClassValidation;
+    private final SchoolClassHelper schoolClassValidation;
     
     /**
      * Returns the type of school class request this service handles,
      * which is DELETE.
      *
-     * @return SchoolClassRequestType.DELETE
+     * @return RequestType.DELETE
      */
     @Override
-    public SchoolClassRequestType getRequestType() {
-        return SchoolClassRequestType.DELETE;
+    public RequestType getRequestType() {
+        return RequestType.DELETE;
     }
     
     /**

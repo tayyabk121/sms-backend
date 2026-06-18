@@ -1,6 +1,6 @@
 package com.example.sms.mapperImpl;
 
-import com.example.sms.entity.Student;
+import com.example.sms.model.Student;
 import com.example.sms.mapper.StudentMapper;
 import com.example.sms.request.StudentRequest;
 import com.example.sms.response.StudentResponse;

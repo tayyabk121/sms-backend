@@ -1,6 +1,6 @@
 package com.example.sms.factories.schoolClassFactory;
 
-import com.example.sms.util.requestType.SchoolClassRequestType;
+import com.example.sms.util.RequestType;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 /**
  * Factory class to get the appropriate SchoolClassOperation implementation
- * based on the SchoolClassRequestType.
+ * based on the RequestType.
  */
 @Component
 @RequiredArgsConstructor
@@ -23,10 +23,10 @@ public class SchoolClassFactory {
      */
     private final List<SchoolClassOperation> schoolClassOperations;
     
-    /** Map to hold the relationship between SchoolClassRequestType
+    /** Map to hold the relationship between RequestType
      *  and its corresponding SchoolClassOperation implementation.
      */
-    private final Map<SchoolClassRequestType,
+    private final Map<RequestType,
             SchoolClassOperation> schoolClassOperationMap = new HashMap<>();
     
     /** Method annotated with @PostConstruct to initialize the
@@ -52,7 +52,7 @@ public class SchoolClassFactory {
      *         given request type.
      */
     public SchoolClassOperation getOperation(
-            final SchoolClassRequestType requestType){
+            final RequestType requestType){
         
         return schoolClassOperationMap.get(requestType);
     }

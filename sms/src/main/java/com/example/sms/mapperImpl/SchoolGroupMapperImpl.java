@@ -1,11 +1,10 @@
 package com.example.sms.mapperImpl;
 
-import com.example.sms.entity.SchoolGroup;
+import com.example.sms.model.SchoolGroup;
 import com.example.sms.mapper.SchoolGroupMapper;
 import com.example.sms.request.SchoolGroupRequest;
 import com.example.sms.response.SchoolGroupResponse;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 /**

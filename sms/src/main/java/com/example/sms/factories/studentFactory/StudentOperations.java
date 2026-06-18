@@ -2,11 +2,11 @@ package com.example.sms.factories.studentFactory;
 
 import com.example.sms.request.StudentRequest;
 import com.example.sms.response.StudentResponse;
-import com.example.sms.util.requestType.StudentRequestType;
+import com.example.sms.util.RequestType;
 
 public interface StudentOperations {
     
-    StudentRequestType getStudentRequestType();
+    RequestType getStudentRequestType();
     
     StudentResponse performOperation(StudentRequest request);
 }

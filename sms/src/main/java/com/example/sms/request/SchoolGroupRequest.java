@@ -1,6 +1,6 @@
 package com.example.sms.request;
 
-import com.example.sms.util.requestType.SchoolGroupRequestType;
+import com.example.sms.util.RequestType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,5 +25,5 @@ public class SchoolGroupRequest {
     
     private String address;
     
-    private SchoolGroupRequestType requestType;
+    private RequestType requestType;
 }

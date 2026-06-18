@@ -1,6 +1,6 @@
 package com.example.sms.response;
 
-import com.example.sms.entity.SchoolClass;
+import com.example.sms.model.SchoolClass;
 import com.example.sms.util.Gender;
 import com.example.sms.util.StudentStatus;
 import com.example.sms.util.Transport;

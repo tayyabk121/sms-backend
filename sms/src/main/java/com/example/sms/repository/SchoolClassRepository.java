@@ -1,6 +1,6 @@
 package com.example.sms.repository;
 
-import com.example.sms.entity.SchoolClass;
+import com.example.sms.model.SchoolClass;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

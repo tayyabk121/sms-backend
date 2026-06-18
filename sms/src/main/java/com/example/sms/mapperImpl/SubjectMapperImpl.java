@@ -1,7 +1,7 @@
 package com.example.sms.mapperImpl;
 
-import com.example.sms.entity.Branch;
-import com.example.sms.entity.Subject;
+import com.example.sms.model.Branch;
+import com.example.sms.model.Subject;
 import com.example.sms.mapper.SubjectMapper;
 import com.example.sms.request.SubjectRequest;
 import com.example.sms.response.BranchResponse;
