@@ -1,22 +1,35 @@
 package com.example.sms.response;
 
-import com.example.sms.entity.User;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.example.sms.util.AdminStatus;
+import com.example.sms.util.StaffRole;
+import com.example.sms.util.UserRole;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@NoArgsConstructor
+import java.util.List;
+
+/** Represents a response containing user information, including their ID, name,
+ * email, phone number, role, permissions, status, and staff role. This class is
+ * used to transfer user data from the server to the client when performing
+ * user-related operations. */
+@Getter
+@Setter
+@Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserResponse {
-
-    private Long id;
-
+    
+    private String id;
+    private SchoolGroupResponse schoolGroupId;
+    private BranchResponse branchId;
+    private String name;
     private String email;
-
-//    private String phone;
-
-    public UserResponse(User user) {
-        this.id = user.getId();
-        this.email = user.getEmail();
-//        this.phone = user.getPhone();
-    }
+    private String phoneNumber;
+    private UserRole role;
+    private String permissions;
+    private AdminStatus status;
+    private StaffRole staffRole;
+    private List<UserResponse> userResponseList;
+    private String message;
 }
